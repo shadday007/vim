@@ -26,7 +26,6 @@ set smartcase           # ignores case unless an upper case letter is present in
 
 # Text Rendering Options {{{1
 syntax enable
-syntax on
 set showbreak=↪  # ↳ ↪
 set list
 set listchars=
