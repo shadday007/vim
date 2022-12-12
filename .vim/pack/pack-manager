@@ -1,0 +1,267 @@
+#!/usr/bin/env bash
+# Install and Update vim plugins
+
+pushd () {
+  command pushd "$@" > /dev/null
+}
+
+popd () {
+  command popd "$@" > /dev/null
+}
+
+readonly SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+readonly PACK_PATH=".vim/pack"
+ 
+pushd "$HOME/.vim/pack"
+pushd "$(git rev-parse --show-toplevel)"
+
+blk='\033[1;30m'   # Black
+red='\033[1;31m'   # Red
+grn='\033[1;32m'   # Green
+ylw='\033[1;33m'   # Yellow
+blu='\033[1;34m'   # Blue
+pur='\033[1;35m'   # Purple
+cyn='\033[1;36m'   # Cyan
+wht='\033[1;37m'   # White
+clr='\033[0m'      # Reset
+
+err() {
+  echo -e "${red}ERROR: $*${clr}" >&2
+}
+
+bug() {
+  echo -e "${cyn}A bug occured. Please copy the following message and report the bug here: https://github.com/shadday007/vim."
+  echo -e "$*${clr}"
+}
+
+usage() {
+  echo -e "\n\n\n\n\n\n\n\n"
+  echo -e "Usage: ${grn}pm [subcommand] [options]${clr}"
+  echo -e "${ylw}Subcommands:${wht}"
+  echo -e " group     'name'                                     Set directory for the group name"
+  echo -e " rmgroup   'name'                                     Remove the group name directory and plugins"
+  echo -e " install   'username/repository' 'group'  [opt|start] Installs a new plugin in start or opt dir"
+  echo -e " uninstall 'repository'          'group'  [opt|start] Uninstalls a plugin in start or opt dir"
+  echo -e " list                                                 Lists installed plugin"
+  echo -e " update                                            Updates installed plugins"
+  echo -e " clean                                             Cleans up all empty directories${clr}"
+}
+
+dir_exists() {
+  local dir=$1
+
+  if [[ -d "$dir" ]]; then
+    true
+  else
+    false
+  fi
+}
+
+file_exists() {
+  local file=$1
+
+  if [[ -f "$file" ]]; then
+    true
+  else
+    false
+  fi
+}
+
+check_dir() {
+  local dir=$1
+
+  if ! dir_exists "$dir"; then
+    mkdir -p  "$dir"
+  fi
+}
+
+check_arg() {
+  local arg=$1
+
+  if [[ -z "$arg" ]]; then
+    usage
+    exit_pm
+  fi
+}
+
+group() {
+  package_group=$1
+
+  for dir in  "${PACK_PATH}/${package_group}"/{start,opt} ; do
+    check_dir $dir
+    echo -e "${grn}Directory ${cyn}$dir ${grn}has been created.${clr}"
+  done
+}
+
+rmgroup() {
+  package_group=$1
+
+  dir="${PACK_PATH}/${package_group}"
+  rm -rf $dir
+  echo -e "${grn}Group directory ${cyn}$dir ${grn}has been deleted.${clr}"
+}
+
+# install the repo, e.g. $1="USER/NAME" $2="colors" $3="start"
+install() {
+  local plugin=$1
+  local package_group=$2
+  local opt=${3,,}
+  local repository="https://github.com/$plugin.git"
+  local package_name=$(basename "$repository" .git)
+  local git_root="$(git rev-parse --show-toplevel)"
+  local pack_group_dir="$PACK_PATH/$package_group/$opt"
+  local pack_dir="$pack_group_dir/$package_name"
+
+  if ! git ls-remote --exit-code -h "$repository" > /dev/null; then
+    err "Template repository not found."
+    exit_pm
+  fi
+  
+  check_dir "$pack_group_dir"
+
+  git submodule init
+  git submodule add "$repository" "$pack_dir"
+  git add .gitmodules "$pack_dir"
+  #git commit -m "feat(pm): Install $plugin using the script pm"
+}
+
+uninstall() {
+  local plugin=$1
+  local package_group=$2
+  local opt=${3,,}
+  local package_name=${plugin}
+  local git_root="$(git rev-parse --show-toplevel)"
+  local pack_group_dir="$PACK_PATH/$package_group/$opt"
+  local pack_dir="$pack_group_dir/$package_name"
+
+  git submodule deinit -f "$pack_dir"
+  git rm -f "$pack_dir"
+  rm -rf .git/modules/"$pack_dir"
+  #git commit -m "chore(pm): Uninstall $plugin using the script pm"
+
+  echo -e "${grn}Uninstalled ${cyn}$plugin.${clr}"
+}
+
+list() {
+# iterate over each GROUP and REPOSITORY stored in $PACK_PATH
+  for GROUP in "$PACK_PATH"/*; do
+    if [[ -d "$GROUP" ]]; then
+      for OPT in "$GROUP"/{start,opt}; do
+        for REPOSITORY in  "$OPT"/* ; do
+          [[ -e "$REPOSITORY" ]] || break # handle empty $PACK_PATH
+          [[ -d "$REPOSITORY" ]] || break # handle files
+          echo "$(basename -- "$GROUP")/$(basename -- "$OPT")/$(basename -- "$REPOSITORY")"
+        done
+      done
+   fi
+  done
+}
+
+update() {
+  local packages
+  packages=$(list)
+
+  if [[ -z "$packages" ]]; then
+    err "No packages installed."
+    exit_pm
+  fi
+
+  for package in $packages; do
+    #pushd "$PACK_PATH"/"$package" || exit_pm
+    echo -e "${ylw}Updating package ${cyn}$package${clr}"
+    git submodule update --remote --merge "$PACK_PATH"/"$package"
+    #git commit -m "chore(pm): Update $plugin using the script pm"
+    #popd
+  done
+
+  echo -e "${grn}All packages updated.${clr}"
+}
+
+# remove all empty directories in $PACK_PATH
+clean() {
+  find "$PACK_PATH" -maxdepth 3 -type d -empty -delete
+
+  check_pack_dir
+
+  echo -e "${grn}Cleaned up ${cyn}$PACK_PATH.${clr}"
+}
+
+check_pack_dir() {
+
+  dir_exists "$PACK_PATH" || mkdir "$PACK_PATH"
+
+}
+
+
+# TODO: Use file ($1=filename) to install plugins.
+install_from_file() {
+  local file=$1
+
+  while read -r line; do
+    echo "do something"
+  done <"$file"
+}
+
+exit_pm() {
+  popd
+  popd
+  exit
+}
+
+#  pause "Press [Enter] key to continue..."
+pause(){
+   read -p "$*"
+}
+
+main() {
+  local option=$1
+  local arg=$2
+  local arg2=$3
+  local arg3=$4
+
+  check_pack_dir
+  
+  if [[ -z "$option" ]]; then
+    usage
+    exit_pm
+  fi
+
+  case $option in
+    "install")
+      check_arg "$arg"
+      check_arg "$arg2"
+      check_arg "$arg3"
+      install "$arg" "$arg2" "$arg3"
+      ;;
+    "uninstall")
+      check_arg "$arg"
+      check_arg "$arg2"
+      check_arg "$arg3"
+      uninstall "$arg" "$arg2" "$arg3"
+      ;;
+    "list")
+      list
+      ;;
+    "update")
+      update
+      ;;
+    "group")
+      check_arg "$arg"
+      group "$arg"
+      ;;
+    "rmgroup")
+      check_arg "$arg"
+      rmgroup "$arg"
+      ;;
+    "clean")
+      clean
+      ;;
+    *)
+      usage
+      ;;
+  esac
+
+  exit_pm
+}
+
+main "$@"
