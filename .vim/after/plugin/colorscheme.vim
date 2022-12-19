@@ -15,4 +15,6 @@ def g:CheckColorScheme()
   g:current_color_scheme = g:colors_name
   g:colors_name = "base16"
 
+  highlight CursorLineNR cterm=bold
+
 enddef
