@@ -7,7 +7,7 @@ def g:CheckColorScheme()
   endif
 
   if filereadable(expand("~/.vim/vimrc-colorscheme.vim"))
-    runtime ~/.vim/vimrc-colorscheme.vim
+    runtime vimrc-colorscheme.vim
   endif
 
   highlight CursorLineNR cterm=bold
