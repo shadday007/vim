@@ -2,3 +2,6 @@ vim9script
 # Leader key   must be first
 g:mapleader = "\<Space>"
 g:maplocalleader = ','
+
+# Enable extended % matching
+packadd! matchit
