@@ -1,0 +1,7 @@
+# admit line comment and blank lines
+#group behavior
+#install tpope/vim-commentary behavior start
+rmgroup behavior  # this is another comment
+#uninstall vim-qf
+
+list
