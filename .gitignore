@@ -11,11 +11,13 @@ Session.vim
 Sessionx.vim
 
 # Temporary
-.netrwhist
+**/.netrwhist
 *~
 # Auto-generated tag files
 tags
 # Persistent undo
 [._]*.un~
 
-.base16*
+**/.base16*
+**/colors/base16*
+**/vimrc-colorscheme*
