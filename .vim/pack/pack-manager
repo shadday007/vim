@@ -34,17 +34,33 @@ bug() {
   echo -e "$*${clr}"
 }
 
+yesornot() {
+  local answer
+
+  while true; do
+      read -p "$1 (y/n)?" yn
+      case $yn in
+          [Yy]* ) answer="y"; break;;
+          [Nn]* ) answer="n"; break;;
+          * ) err "Please answer yes or not.";;
+      esac
+  done
+  echo "$answer"
+}
+
 usage() {
   echo -e "\n\n\n\n\n\n\n\n"
-  echo -e "Usage: ${grn}pm [subcommand] [options]${clr}"
+  echo -e "Usage:\n ${grn}pack-manager [subcommand] [options]${clr}"
   echo -e "${ylw}Subcommands:${wht}"
-  echo -e " group     'name'                                     Set directory for the group name"
-  echo -e " rmgroup   'name'                                     Remove the group name directory and plugins"
-  echo -e " install   'username/repository' 'group'  [opt|start] Installs a new plugin in start or opt dir"
-  echo -e " uninstall 'repository'          'group'  [opt|start] Uninstalls a plugin in start or opt dir"
-  echo -e " list                                                 Lists installed plugin"
-  echo -e " update                                            Updates installed plugins"
-  echo -e " clean                                             Cleans up all empty directories${clr}"
+  echo -e " ${pur}group     ${wht}'name'                                    ${clr}Prepare directory for the group name"
+  echo -e " ${pur}rmgroup   ${wht}'name'                                    ${clr}Remove the group name directory if empty"
+  echo -e " ${pur}install   ${wht}'username/repository' 'group' 'opt|start' ${clr}Installs or update a plugin"
+  echo -e " ${pur}uninstall ${wht}'repository'                              ${clr}Uninstall plugin"
+  echo -e " ${pur}list      ${wht}                                          ${clr}List installed plugins"
+  echo -e " ${pur}update    ${wht}                                          ${clr}Update installed plugins"
+  echo -e " ${pur}clean     ${wht}                                          ${clr}Cleans up all empty directories"
+  echo -e " ${pur}process   ${wht}[filename]                                ${clr}Process commands from filename"
+  echo -e " ${pur}          ${wht}                                          ${clr}Default: ~/.vim/plugins.pack"
 }
 
 dir_exists() {
@@ -85,61 +101,106 @@ check_arg() {
 }
 
 group() {
-  package_group=$1
+  group=$1
 
-  for dir in  "${PACK_PATH}/${package_group}"/{start,opt} ; do
-    check_dir $dir
-    echo -e "${grn}Directory ${cyn}$dir ${grn}has been created.${clr}"
+  for dir in  "${PACK_PATH}/${group}"/{start,opt} ; do
+    if [[ ! -d "$dir" ]]; then
+      mkdir -p  "$dir"
+      echo -e "${grn}Directory ${cyn}$dir ${grn}has been created.${clr}"
+    else
+      echo -e "${grn}Directory ${cyn}$dir ${grn}is already created.${clr}"
+    fi
   done
 }
 
 rmgroup() {
-  package_group=$1
+  group=$1
 
-  dir="${PACK_PATH}/${package_group}"
-  rm -rf $dir
-  echo -e "${grn}Group directory ${cyn}$dir ${grn}has been deleted.${clr}"
+  dir="${PACK_PATH}/${group}"
+  dir_opt="$dir"/opt
+  dir_start="$dir"/start
+
+  if [[ -d "$dir" ]]; then
+    if [[ "$(ls -A $dir_opt)" || "$(ls -A $dir_start)" ]]; then
+      echo "Take action $dir is not Empty"
+    else
+      echo "$dir is Empty"
+      rm -rf $dir
+      echo -e "${grn}Group directory ${cyn}$dir ${grn}has been deleted.${clr}"
+    fi
+  else
+    echo "Package group $group not found."
+  fi
+
 }
 
 # install the repo, e.g. $1="USER/NAME" $2="colors" $3="start"
 install() {
   local plugin=$1
-  local package_group=$2
+  local group=$2
   local opt=${3,,}
   local repository="https://github.com/$plugin.git"
-  local package_name=$(basename "$repository" .git)
+  local package=$(basename "$repository" .git)
   local git_root="$(git rev-parse --show-toplevel)"
-  local pack_group_dir="$PACK_PATH/$package_group/$opt"
-  local pack_dir="$pack_group_dir/$package_name"
+  local group_dir="$PACK_PATH/$group/$opt"
+  local pack_dir="$group_dir/$package"
 
   if ! git ls-remote --exit-code -h "$repository" > /dev/null; then
-    err "Template repository not found."
+    err "Template repository $repository not found."
     exit_pm
   fi
-  
-  check_dir "$pack_group_dir"
 
-  git submodule init
-  git submodule add "$repository" "$pack_dir"
-  git add .gitmodules "$pack_dir"
-  #git commit -m "feat(pm): Install $plugin using the script pm"
+  local whereIsInstalled=$(list | grep $package)
+  if [[ ! -z "$whereIsInstalled" ]]; then
+    local  inGroup=$(echo "$whereIsInstalled" | cut -d "/" -f1)
+    local  inOpt=$(echo "$whereIsInstalled" | cut -d "/" -f2)
+
+    if [[ "$group" == "$inGroup" && "$opt" == "$inOpt" ]]; then
+      echo "repo is already installed, updating..."
+      git submodule update --remote "$pack_dir"
+    else
+      echo -e "Plugin installed in group: ${cyn}$inGroup${clr} option: ${cyn}$inOpt${clr}"
+      echo -e "Please uninstall first."
+    fi
+  else
+    if [[ ! -d "$group_dir" ]]; then
+      echo -e "${ylw}Warning: ${cyn}$group_dir${ylw} doesn't exist.${clr}"
+      answer=$(yesornot "Do you want continue ")
+      if [[ "$answer" == "y" ]]; then
+        echo -e "Configuring ${cyn}$group${clr}..."
+        group "$group"
+
+        echo -e "repo ${cyn}$repository${clr} is installing..."
+        check_dir "$group_dir"
+
+        git submodule init
+        git submodule add --force "$repository" "$pack_dir"
+        git add .gitmodules "$pack_dir"
+      fi
+    fi
+  fi
 }
 
 uninstall() {
-  local plugin=$1
-  local package_group=$2
-  local opt=${3,,}
-  local package_name=${plugin}
+  local package=$1
   local git_root="$(git rev-parse --show-toplevel)"
-  local pack_group_dir="$PACK_PATH/$package_group/$opt"
-  local pack_dir="$pack_group_dir/$package_name"
+  local whereIsInstalled=$(list | grep $package)
+  local inGroup=$(echo "$whereIsInstalled" | cut -d "/" -f1)
+  local inOpt=$(echo "$whereIsInstalled" | cut -d "/" -f2)
+  local group_dir="$PACK_PATH/$inGroup/$inOpt"
+  local pack_dir="$group_dir/$package"
 
-  git submodule deinit -f "$pack_dir"
-  git rm -f "$pack_dir"
-  rm -rf .git/modules/"$pack_dir"
-  #git commit -m "chore(pm): Uninstall $plugin using the script pm"
+  if [[ ! -z "$whereIsInstalled" ]]; then
 
-  echo -e "${grn}Uninstalled ${cyn}$plugin.${clr}"
+    echo "repo is already installed, deleting..."
+    git submodule deinit -f "$pack_dir"
+    git rm -f "$pack_dir"
+    rm -rf .git/modules/"$pack_dir"
+  
+    echo -e "${grn}Uninstalled ${cyn}$package.${clr}"
+  else
+    echo "repo is not installed."
+  fi
 }
 
 list() {
@@ -195,10 +256,22 @@ check_pack_dir() {
 
 # TODO: Use file ($1=filename) to install plugins.
 install_from_file() {
-  local file=$1
+  local file=${1:-~/.vim/plugins.pack}
 
   while read -r line; do
-    echo "do something"
+
+    line=$(echo $line | sed -e 's/\([[:blank:]]\+\|^\)#[^!].*$//') #remove comment, don't remove shebang [^!]
+    line=$(echo $line | sed -e 's/^[[:blank:]]*$//')               #remove blank line
+
+    if [[ ! -z "$line" ]]; then
+      option=$(echo $line | cut -d' ' -f1)
+      arg=$(echo $line | cut -d' ' -f2)
+      arg2=$(echo $line | cut -d' ' -f3)
+      arg3=$(echo $line | cut -d' ' -f4)
+
+      process_option "$option" "$arg" "$arg2" "$arg3"
+    fi
+
   done <"$file"
 }
 
@@ -211,6 +284,50 @@ exit_pm() {
 #  pause "Press [Enter] key to continue..."
 pause(){
    read -p "$*"
+}
+
+process_option() {
+  local option=${1,,}
+  local arg=${2,,}
+  local arg2=${3,,}
+  local arg3=${4,,}
+
+  case $option in
+    "install")
+      check_arg "$arg"
+      check_arg "$arg2"
+      check_arg "$arg3"
+      install "$arg" "$arg2" "$arg3"
+      ;;
+    "uninstall")
+      check_arg "$arg"
+      uninstall "$arg" 
+      ;;
+    "list")
+      echo -e "${grn}\nList of plugins installed by group:${clr}"
+      list
+      ;;
+    "update")
+      update
+      ;;
+    "group")
+      check_arg "$arg"
+      group "$arg"
+      ;;
+    "process")
+      install_from_file "$arg"
+      ;;
+    "rmgroup")
+      check_arg "$arg"
+      rmgroup "$arg"
+      ;;
+    "clean")
+      clean
+      ;;
+    *)
+      usage
+      ;;
+  esac
 }
 
 main() {
@@ -226,40 +343,7 @@ main() {
     exit_pm
   fi
 
-  case $option in
-    "install")
-      check_arg "$arg"
-      check_arg "$arg2"
-      check_arg "$arg3"
-      install "$arg" "$arg2" "$arg3"
-      ;;
-    "uninstall")
-      check_arg "$arg"
-      check_arg "$arg2"
-      check_arg "$arg3"
-      uninstall "$arg" "$arg2" "$arg3"
-      ;;
-    "list")
-      list
-      ;;
-    "update")
-      update
-      ;;
-    "group")
-      check_arg "$arg"
-      group "$arg"
-      ;;
-    "rmgroup")
-      check_arg "$arg"
-      rmgroup "$arg"
-      ;;
-    "clean")
-      clean
-      ;;
-    *)
-      usage
-      ;;
-  esac
+  process_option "$option" "$arg" "$arg2" "$arg3"
 
   exit_pm
 }
