@@ -1,4 +1,11 @@
 vim9script
+
+if exists('g:loaded_options_plugin')
+  finish
+endif
+
+g:loaded_options_plugin = 1
+
 # Indention Options {{{1
 filetype indent plugin on
 set backspace=indent,eol,start # Makes the backspace key behave like you'd expect
