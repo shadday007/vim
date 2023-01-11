@@ -38,14 +38,13 @@ yesornot() {
   local answer
 
   while true; do
-      read -p "$1 (y/n)?" yn
+      read -p "$1 (y/n)?" yn <&1
       case $yn in
-          [Yy]* ) answer="y"; break;;
-          [Nn]* ) answer="n"; break;;
+          [Yy]* ) return 0 ;;
+          [Nn]* ) return 1 ;;
           * ) err "Please answer yes or not.";;
       esac
   done
-  echo "$answer"
 }
 
 usage() {
@@ -165,8 +164,8 @@ install() {
   else
     if [[ ! -d "$group_dir" ]]; then
       echo -e "${ylw}Warning: ${cyn}$group_dir${ylw} doesn't exist.${clr}"
-      answer=$(yesornot "Do you want continue ")
-      if [[ "$answer" == "y" ]]; then
+      yesornot "Do you want continue "
+      if [[ $? -eq 0 ]]; then
         echo -e "Configuring ${cyn}$group${clr}..."
         group "$group"
 
