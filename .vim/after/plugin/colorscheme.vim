@@ -15,3 +15,13 @@ def g:CheckColorScheme()
   highlight CursorLineNR cterm=bold
 
 enddef
+
+if has('autocmd')
+
+  augroup AutoColorScheme
+    autocmd!
+    autocmd VimEnter,FocusGained * g:CheckColorScheme() 
+  augroup END
+
+endif
+
