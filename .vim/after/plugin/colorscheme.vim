@@ -10,6 +10,8 @@ def g:CheckColorScheme()
     runtime vimrc-colorscheme.vim
   endif
 
+  doautocmd ColorScheme
+
   highlight CursorLineNR cterm=bold
 
 enddef

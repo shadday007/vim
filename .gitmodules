@@ -1,0 +1,6 @@
+[submodule ".vim/pack/colors/start/pinnacle"]
+	path = .vim/pack/colors/start/pinnacle
+	url = https://github.com/wincent/pinnacle.git
+[submodule ".vim/pack/git/start/vim-fugitive"]
+	path = .vim/pack/git/start/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
