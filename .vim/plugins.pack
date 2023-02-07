@@ -1,7 +1,22 @@
 # admit line comment and blank lines
-#group behavior
+group behavior
+install liuchengxu/vim-which-key behavior start
 #install tpope/vim-commentary behavior start
-rmgroup behavior  # this is another comment
 #uninstall vim-qf
+
+group Colors
+install wincent/pinnacle Colors start # http://stackoverflow.com/a/1333025
+
+group Appearance
+
+group Git
+install tpope/vim-fugitive Git start # http://stackoverflow.com/a/1333025
+
+group Development
+
+group Languages
+
+group Utilities
+install dstein64/vim-startuptime Utilities start
 
 list

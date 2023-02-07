@@ -4,3 +4,9 @@
 [submodule ".vim/pack/git/start/vim-fugitive"]
 	path = .vim/pack/git/start/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
+[submodule ".vim/pack/behavior/start/vim-which-key"]
+	path = .vim/pack/behavior/start/vim-which-key
+	url = https://github.com/liuchengxu/vim-which-key.git
+[submodule ".vim/pack/utilities/start/vim-startuptime"]
+	path = .vim/pack/utilities/start/vim-startuptime
+	url = https://github.com/dstein64/vim-startuptime.git
