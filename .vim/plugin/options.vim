@@ -55,7 +55,7 @@ if has('gui')
     set guioptions-=l  #remove Left-hand scrollbar
 endif
 set wildmenu
-set wildmode=longest,full 
+set wildmode=longest,full
 set wildoptions=fuzzy,pum,tagfile
 set wildignore=*~,#*#,*.7z,.DS_Store,.git,.hg,.svn,*.a,*.adf,*.asc,*.au,*.aup
             \,*.avi,*.bin,*.bmp,*.bz2,*.class,*.db,*.dbm,*.djvu,*.docx,*.exe
@@ -83,6 +83,8 @@ set updatetime=300
 set splitbelow         # Always split below
 set splitright         # Always split right
 set colorcolumn=85
+# By default timeoutlen is 1000 ms
+set timeoutlen=500
 # }}}
 
 # Code Folding Options {{{1

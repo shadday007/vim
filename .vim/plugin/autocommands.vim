@@ -19,7 +19,7 @@ def AutoCommands(): void
   autocmd VimResized * wincmd =
 
   # Update a buffer's contents on focus if it changed outside of Vim.
-  autocmd FocusGained,BufEnter * :checktime
+  autocmd FocusGained,BufEnter * silent! checktime
 
   # Remember last position in file:
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
@@ -47,6 +47,14 @@ def AutoCommands(): void
     autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
   augroup END
 
+  augroup filemarks
+    autocmd!
+    autocmd BufLeave *.vim  normal! mV
+    autocmd BufLeave *.css  normal! mC
+    autocmd BufLeave *.html normal! mH
+    autocmd BufLeave *.js   normal! mJ
+    autocmd BufLeave *.php  normal! mP
+  augroup END
 enddef
 
 AutoCommands()

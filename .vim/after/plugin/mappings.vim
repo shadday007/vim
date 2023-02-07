@@ -33,6 +33,8 @@ nmap <silent> <A-h> <C-w><
 nmap <silent> <A-j> <C-W>-
 nmap <silent> <A-k> <C-W>+
 nmap <silent> <A-l> <C-w>>
+# lists all loaded buffers and populates the prompt for you
+nnoremap gb :ls<CR>:b<Space>
 
 # Insert Mode
 # Spell correction
@@ -45,27 +47,26 @@ inoremap <C-l> <Right>
 # Bash like
 inoremap <C-a> <C-O>^
 inoremap <C-X><C-A> <C-A>
-inoremap <expr> <C-B> getline('.')=~'^\s*$'&&col('.')>strlen(getline('.'))?"0\<Lt>C-D>\<Lt>Esc>kJs":"\<Lt>Left>"
+inoremap <expr> <C-B> getline('.')=~'^\s*$'&&col('.')>strlen(getline('.')) ? "0\<Lt>C-D>\<Lt>Esc>kJs" : "\<Lt>Left>"
 inoremap <expr><C-e> pumvisible() ? "\<C-e>" : "\<End>"
-inoremap <expr> <C-D> col('.')>strlen(getline('.'))?"\<Lt>C-D>":"\<Lt>Del>"
-inoremap <expr> <C-E> col('.')>strlen(getline('.'))<bar><bar>pumvisible()?"\<Lt>C-E>":"\<Lt>End>"
-inoremap <expr> <C-F> col('.')>strlen(getline('.'))?"\<Lt>C-F>":"\<Lt>Right>"
+inoremap <expr> <C-D> col('.')>strlen(getline('.')) ? "\<Lt>C-D>" : "\<Lt>Del>"
+inoremap <expr> <C-E> col('.')>strlen(getline('.'))<bar><bar>pumvisible() ? "\<Lt>C-E>" : "\<Lt>End>"
+inoremap <expr> <C-F> col('.')>strlen(getline('.')) ? "\<Lt>C-F>" : "\<Lt>Right>"
 inoremap <C-w> <C-[>diwa
 inoremap <C-u> <C-G>u<C-U>
 
 # Command mode shortcut
-cnoremap w!! w !sudo tee % >/dev/null
+cnoremap <C-a> <Home>
+cnoremap <C-X><C-A> <C-A>
+cnoremap <C-b> <S-Left>
+cnoremap <expr> <C-D> getcmdpos() > strlen(getcmdline()) ? "\<Lt>C-D>" : "\<Lt>Del>"
+cnoremap <expr> <C-F> getcmdpos() > strlen(getcmdline()) ? &cedit : "\<Lt>S-Right>"
 cnoremap <C-h> <Left>
 cnoremap <C-j> <Down>
 cnoremap <C-k> <Up>
-cnoremap <C-l> <Right>
-cnoremap <C-b> <S-Left>
-cnoremap <expr> <C-F> getcmdpos()>strlen(getcmdline())?&cedit:"\<Lt>S-Right>"
-cnoremap <C-a> <Home>
-cnoremap <C-X><C-A> <C-A>
-cnoremap <C-e> <End>
-cnoremap <expr> <C-D> getcmdpos()>strlen(getcmdline())?"\<Lt>C-D>":"\<Lt>Del>"
+cnoremap <expr> <C-l> getcmdpos() > strlen(getcmdline()) ? "\<Lt>C-l>" : "\<Lt>Right>"
 cnoremap <C-t> <C-R>=expand("%:p:h") . "/" <CR>
+cnoremap w!! w !sudo tee % >/dev/null
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
 
 # Visual Mode
