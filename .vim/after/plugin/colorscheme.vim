@@ -20,7 +20,7 @@ if has('autocmd')
 
   augroup AutoColorScheme
     autocmd!
-    autocmd SigUSR1,VimEnter,FocusGained * g:CheckColorScheme()
+    autocmd VimEnter,FocusGained * g:CheckColorScheme()
   augroup END
 
 endif
