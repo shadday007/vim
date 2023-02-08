@@ -47,6 +47,15 @@ def AutoCommands(): void
     autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
   augroup END
 
+  # Wait until idle to run additional "boot" commands.
+  augroup Idleboot
+    autocmd!
+    if has('vim_starting')
+      autocmd CursorHold,CursorHoldI * ++once doautocmd User Defer
+    endif
+  augroup END
+
+  autocmd User Defer echo "Executing User Deferring commands"
 enddef
 
 AutoCommands()
