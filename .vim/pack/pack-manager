@@ -11,7 +11,7 @@ popd () {
 
 readonly SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
 readonly PACK_PATH=".vim/pack"
- 
+
 pushd "$HOME/.vim/pack"
 pushd "$(git rev-parse --show-toplevel)"
 
@@ -38,12 +38,12 @@ yesornot() {
   local answer
 
   while true; do
-      read -p "$1 (y/n)?" yn <&1
-      case $yn in
-          [Yy]* ) return 0 ;;
-          [Nn]* ) return 1 ;;
-          * ) err "Please answer yes or not.";;
-      esac
+    read -p "$1 (y/n)?" yn <&1
+    case $yn in
+      [Yy]* ) return 0 ;;
+      [Nn]* ) return 1 ;;
+      * ) err "Please answer yes or not.";;
+    esac
   done
 }
 
@@ -182,7 +182,6 @@ install() {
   fi
 }
 
-
 uninstall() {
   local package=$1
   local git_root="$(git rev-parse --show-toplevel)"
@@ -198,7 +197,7 @@ uninstall() {
     git submodule deinit -f "$pack_dir"
     git rm -f "$pack_dir"
     rm -rf .git/modules/"$pack_dir"
-  
+
     echo -e "${grn}Uninstalled ${cyn}$package.${clr}"
   else
     echo "repo is not installed."
@@ -206,7 +205,7 @@ uninstall() {
 }
 
 list() {
-# iterate over each GROUP and REPOSITORY stored in $PACK_PATH
+  # iterate over each GROUP and REPOSITORY stored in $PACK_PATH
   for GROUP in "$PACK_PATH"/*; do
     if [[ -d "$GROUP" ]]; then
       for OPT in "$GROUP"/{start,opt}; do
@@ -216,7 +215,7 @@ list() {
           echo "$(basename -- "$GROUP")/$(basename -- "$OPT")/$(basename -- "$REPOSITORY")"
         done
       done
-   fi
+    fi
   done
 }
 
@@ -255,7 +254,6 @@ check_pack_dir() {
 
 }
 
-
 # TODO: Use file ($1=filename) to install plugins.
 install_from_file() {
   local file=${1:-~/.vim/plugins.pack}
@@ -275,6 +273,17 @@ install_from_file() {
     fi
 
   done <"$file"
+}
+
+updatevimhelptags () {
+  mkdir -p ~/.vim/doc
+  pushd ~/.vim/doc
+  for ppath in ../pack/*/*/*
+  do
+    ln -snf "$ppath/doc" "$(basename "$ppath")"
+  done
+  vim "+helptags ~/.vim/doc | q"
+  popd
 }
 
 exit_pm() {
@@ -303,7 +312,7 @@ process_option() {
       ;;
     "uninstall")
       check_arg "$arg"
-      uninstall "$arg" 
+      uninstall "$arg"
       ;;
     "list")
       echo -e "${grn}\nList of plugins installed by group:${clr}"
@@ -339,7 +348,7 @@ main() {
   local arg3=$4
 
   check_pack_dir
-  
+
   if [[ -z "$option" ]]; then
     usage
     exit_pm
