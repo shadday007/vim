@@ -5,13 +5,6 @@ if exists("g:loaded_mappings_plugin")
 endif
 g:loaded_mappings_plugin = 1
 
-if !has("gui_running") && !exists("loaded_fixkey") # drmikehenry/vim-fixkey plugin
-  execute "set <M-h>=\<Esc>h"
-  execute "set <M-j>=\<Esc>j"
-  execute "set <M-k>=\<Esc>k"
-  execute "set <M-l>=\<Esc>l"
-endif
-
 # Basic {{{1
 
 # Normal Mode
@@ -28,11 +21,11 @@ nmap <C-j> <C-W>j
 nmap <C-k> <C-W>k
 nmap <c-h> <c-w>h
 nmap <c-l> <c-w>l
-# Maps Alt-[h,j,k,l] to resizing a window split
-nmap <silent> <A-h> <C-w><
-nmap <silent> <A-j> <C-W>-
-nmap <silent> <A-k> <C-W>+
-nmap <silent> <A-l> <C-w>>
+# Maps shift-[arrows] to resizing a window split
+nmap <silent> <S-LEFT> <C-w><
+nmap <silent> <S-DOWN> <C-W>-
+nmap <silent> <S-UP> <C-W>+
+nmap <silent> <S-RIGHT> <C-w>>
 # lists all loaded buffers and populates the prompt for you
 nnoremap gb :ls<CR>:b<Space>
 
@@ -47,11 +40,11 @@ inoremap <C-l> <Right>
 # Bash like
 inoremap <C-a> <C-O>^
 inoremap <C-X><C-A> <C-A>
-inoremap <expr> <C-B> getline('.')=~'^\s*$'&&col('.')>strlen(getline('.')) ? "0\<Lt>C-D>\<Lt>Esc>kJs" : "\<Lt>Left>"
+inoremap <expr> <C-B> getline('.')=~'^\s*$'&&col('.') > strlen(getline('.')) ? "0\<Lt>C-D>\<Lt>Esc>kJs" : "\<Lt>Left>"
 inoremap <expr><C-e> pumvisible() ? "\<C-e>" : "\<End>"
-inoremap <expr> <C-D> col('.')>strlen(getline('.')) ? "\<Lt>C-D>" : "\<Lt>Del>"
-inoremap <expr> <C-E> col('.')>strlen(getline('.'))<bar><bar>pumvisible() ? "\<Lt>C-E>" : "\<Lt>End>"
-inoremap <expr> <C-F> col('.')>strlen(getline('.')) ? "\<Lt>C-F>" : "\<Lt>Right>"
+inoremap <expr> <C-D> col('.') > strlen(getline('.')) ? "\<Lt>C-D>" : "\<Lt>Del>"
+inoremap <expr> <C-E> col('.') > strlen(getline('.'))<bar><bar>pumvisible() ? "\<Lt>C-E>" : "\<Lt>End>"
+inoremap <expr> <C-F> col('.') > strlen(getline('.')) ? "\<Lt>C-F>" : "\<Lt>Right>"
 inoremap <C-w> <C-[>diwa
 inoremap <C-u> <C-G>u<C-U>
 
