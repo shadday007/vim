@@ -5,3 +5,5 @@ g:maplocalleader = ','
 
 # Enable extended % matching
 packadd! matchit
+# For filtering quickfix list
+packadd cfilter
