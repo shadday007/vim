@@ -34,7 +34,6 @@ def AutoCommands(): void
   autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
   autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
   autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-  autocmd BufWinLeave * clearmatches()
 
   autocmd BufWritePre * :%s/\s\+$//e
   autocmd FileWritePre   * :%s/\s\+$//e
@@ -56,8 +55,21 @@ def AutoCommands(): void
     autocmd BufLeave *.php  normal! mP
   augroup END
 
+  augroup mysyntax
+    autocmd!
+    autocmd Syntax * matchadd('Todo',  '\v\W\zs<(TODO|FIXME|CHANGED|XXX|BUG|HACK)>')
+    autocmd Syntax * matchadd('ModeMsg', '\v\W\zs<(NOTE|INFO|IDEA)>')
+    autocmd Syntax * matchadd('Search', '\v\W\zs<(HELP|DEBUG)>')
+    autocmd Syntax * matchadd('ExtraWhiteSpace', '\v\W\zs<(ERROR|FATAL)>')
+  augroup END
+
+  augroup sourcevimfiles
+    autocmd!
+    autocmd BufWritePost *.vim execute 'source' %
+  augroup END
+
   # Wait until idle to run additional "boot" commands.
-  augroup Idleboot
+  augroup idleboot
     autocmd!
     if has('vim_starting')
       autocmd CursorHold,CursorHoldI * ++once doautocmd User Defer
