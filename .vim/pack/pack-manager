@@ -35,10 +35,8 @@ bug() {
 }
 
 yesornot() {
-  local answer
-
   while true; do
-    read -p "$1 (y/n)?" yn <&1
+    read -r -p "$1 (y/n)?" yn <&1
     case $yn in
       [Yy]* ) return 0 ;;
       [Nn]* ) return 1 ;;
@@ -58,6 +56,7 @@ usage() {
   echo -e " ${pur}list      ${wht}                                          ${clr}List installed plugins"
   echo -e " ${pur}update    ${wht}                                          ${clr}Update installed plugins"
   echo -e " ${pur}clean     ${wht}                                          ${clr}Cleans up all empty directories"
+  echo -e " ${pur}gendocs   ${wht}                                          ${clr}Generate all vim tags documentation"
   echo -e " ${pur}process   ${wht}[filename]                                ${clr}Process commands from filename"
   echo -e " ${pur}          ${wht}                                          ${clr}Default: ~/.vim/plugins.pack"
 }
@@ -124,7 +123,7 @@ rmgroup() {
       echo "Take action $dir is not Empty"
     else
       echo "$dir is Empty"
-      rm -rf $dir
+      rm -rf "$dir"
       echo -e "${grn}Group directory ${cyn}$dir ${grn}has been deleted.${clr}"
     fi
   else
@@ -284,6 +283,7 @@ updatevimhelptags () {
   done
   vim "+helptags ~/.vim/doc | q"
   popd
+  echo -e "${grn}Vim help tags generated! ${clr}"
 }
 
 exit_pm() {
@@ -294,7 +294,7 @@ exit_pm() {
 
 #  pause "Press [Enter] key to continue..."
 pause(){
-   read -p "$*"
+   read -r -p "$*"
 }
 
 process_option() {
@@ -331,6 +331,9 @@ process_option() {
     "rmgroup")
       check_arg "$arg"
       rmgroup "$arg"
+      ;;
+    "gendocs")
+      updatevimhelptags
       ;;
     "clean")
       clean
