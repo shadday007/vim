@@ -10,9 +10,10 @@ install wincent/pinnacle Colors start # http://stackoverflow.com/a/1333025
 group Appearance
 
 group Git
-install tpope/vim-fugitive Git start # http://stackoverflow.com/a/1333025
+install tpope/vim-fugitive Git start # Git support
 
 group Development
+install dense-analysis/ale Development start # Linter
 
 group Languages
 
