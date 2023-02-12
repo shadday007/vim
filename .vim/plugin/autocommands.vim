@@ -65,7 +65,7 @@ def AutoCommands(): void
 
   augroup sourcevimfiles
     autocmd!
-    autocmd BufWritePost *.vim execute 'source' %
+    autocmd BufWritePost,FileWritePost *.vim,~/.vimrc,~/.vim/vimrc source <afile>
   augroup END
 
   # Wait until idle to run additional "boot" commands.
