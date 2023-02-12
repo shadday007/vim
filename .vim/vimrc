@@ -3,6 +3,10 @@ vim9script
 g:mapleader = "\<Space>"
 g:maplocalleader = ','
 
+if empty($MYVIMRC)
+  var $MYVIMRC = expand('<sfile>:p')
+endif
+
 # Enable extended % matching
 packadd! matchit
 # For filtering quickfix list
