@@ -4,7 +4,7 @@ g:mapleader = "\<Space>"
 g:maplocalleader = ','
 
 if empty($MYVIMRC)
-  var $MYVIMRC = expand('<sfile>:p')
+  $MYVIMRC = expand('<sfile>:p')
 endif
 
 # Enable extended % matching
