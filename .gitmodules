@@ -10,6 +10,36 @@
 [submodule ".vim/pack/utilities/start/vim-startuptime"]
 	path = .vim/pack/utilities/start/vim-startuptime
 	url = https://github.com/dstein64/vim-startuptime.git
+[submodule ".vim/pack/utilities/start/vim-healthcheck"]
+	path = .vim/pack/utilities/start/vim-healthcheck
+	url = https://github.com/rhysd/vim-healthcheck.git
+[submodule ".vim/pack/development/start/vim-lsp"]
+	path = .vim/pack/development/start/vim-lsp
+	url = https://github.com/prabirshrestha/vim-lsp.git
+[submodule ".vim/pack/development/start/vim-lsp-settings"]
+	path = .vim/pack/development/start/vim-lsp-settings
+	url = https://github.com/mattn/vim-lsp-settings.git
 [submodule ".vim/pack/development/start/ale"]
 	path = .vim/pack/development/start/ale
 	url = https://github.com/dense-analysis/ale.git
+[submodule ".vim/pack/development/start/asyncomplete.vim"]
+	path = .vim/pack/development/start/asyncomplete.vim
+	url = https://github.com/prabirshrestha/asyncomplete.vim.git
+[submodule ".vim/pack/development/start/asyncomplete-lsp.vim"]
+	path = .vim/pack/development/start/asyncomplete-lsp.vim
+	url = https://github.com/prabirshrestha/asyncomplete-lsp.vim.git
+[submodule ".vim/pack/development/start/vim-lsp-ale"]
+	path = .vim/pack/development/start/vim-lsp-ale
+	url = https://github.com/rhysd/vim-lsp-ale.git
+[submodule ".vim/pack/development/start/vim-vsnip"]
+	path = .vim/pack/development/start/vim-vsnip
+	url = https://github.com/hrsh7th/vim-vsnip.git
+[submodule ".vim/pack/development/start/vim-vsnip-integ"]
+	path = .vim/pack/development/start/vim-vsnip-integ
+	url = https://github.com/hrsh7th/vim-vsnip-integ.git
+[submodule ".vim/pack/development/start/friendly-snippets"]
+	path = .vim/pack/development/start/friendly-snippets
+	url = https://github.com/rafamadriz/friendly-snippets.git
+[submodule ".vim/pack/development/start/asyncomplete-ale.vim"]
+	path = .vim/pack/development/start/asyncomplete-ale.vim
+	url = https://github.com/andreypopp/asyncomplete-ale.vim.git

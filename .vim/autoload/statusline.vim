@@ -4,6 +4,7 @@ g:git_infos = {'dir': '', 'branch': '', 'prev_dir': '', 'is_root': false}
 var git = g:git_infos
 
 var is_fugitive = exists('g:loaded_fugitive')
+var is_ale = exists('g:loaded_ale')
 var is_gui = has('gui_running')
 var ispadding: bool = false
 var show_syntax: bool = false
@@ -156,7 +157,7 @@ def Rhs(): string
       rhs ..= repeat(' ', padding)
     endif
 
-    rhs ..= Line_height() .. Column_width() .. Page_pages() .. Show_syntax() .. Warn()
+    rhs ..= Line_height() .. Column_width() .. Page_pages() .. Show_syntax() .. Warn() .. LinterStatus()
 
     if len(virtcol('.')) < 2
       rhs ..= ' '
@@ -401,6 +402,22 @@ def ReadOnly(): string
     lro = ' '
   endif
   return lro
+enddef
+
+def LinterStatus(): string
+  if !is_ale
+    return ''
+  endif
+
+  var counts = ale#statusline#Count(bufnr(''))
+  var all_errors = counts.error + counts.style_error
+  var all_non_errors = counts.total - all_errors
+
+  return counts.total == 0 ? '' : printf(
+           '😞 %dW %dE',
+           all_non_errors,
+           all_errors
+        )
 enddef
 
 def Get_spell_settings(): dict<any>

@@ -14,10 +14,21 @@ install tpope/vim-fugitive Git start # Git support
 
 group Development
 install dense-analysis/ale Development start # Linter
+install rhysd/vim-lsp-ale Development start # Integration
+install prabirshrestha/vim-lsp Development start # Lsp client
+install mattn/vim-lsp-settings Development start # Lsp configuration
+install prabirshrestha/asyncomplete.vim Development start # Autocomplete
+install prabirshrestha/asyncomplete-lsp.vim Development start # Integration
+install andreypopp/asyncomplete-ale.vim Development start # Integration
+install hrsh7th/vim-vsnip Development start # Integration
+install hrsh7th/vim-vsnip-integ Development start # Integration
+install rafamadriz/friendly-snippets Development start # Integration
 
 group Languages
 
 group Utilities
 install dstein64/vim-startuptime Utilities start
+install rhysd/vim-healthcheck Utilities start
 
+gendocs
 list
