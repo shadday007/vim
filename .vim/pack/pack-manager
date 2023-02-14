@@ -132,29 +132,48 @@ rmgroup() {
 
 }
 
+isInstalled() {
+  local package=$1
+
+  for p in $(list | grep "$package"); do
+    if [[ $package == $(echo "$p" | cut -d "/" -f3) ]]; then
+      echo "$p"
+      break
+    fi
+  done
+}
+
 # install the repo, e.g. $1="USER/NAME" $2="colors" $3="start"
 install() {
   local plugin=$1
   local group=$2
   local opt=${3,,}
   local repository="https://github.com/$plugin.git"
-  local package=$(basename "$repository" .git)
-  local git_root="$(git rev-parse --show-toplevel)"
+  local package
+  package=$(basename "$repository" .git)
+  local git_root
+  git_root="$(git rev-parse --show-toplevel)"
   local group_dir="$PACK_PATH/$group/$opt"
   local pack_dir="$group_dir/$package"
+  local inGroup
+  local inOpt
 
   if ! git ls-remote --exit-code -h "$repository" > /dev/null; then
     err "Template repository $repository not found."
     exit_pm
   fi
 
-  local whereIsInstalled=$(list | grep $package)
-  if [[ ! -z "$whereIsInstalled" ]]; then
-    local  inGroup=$(echo "$whereIsInstalled" | cut -d "/" -f1)
-    local  inOpt=$(echo "$whereIsInstalled" | cut -d "/" -f2)
+  local whereIsInstalled
+  whereIsInstalled=$(isInstalled "$package")
 
+  if [[ -n "$whereIsInstalled" ]]; then
+    inGroup=$(echo "$whereIsInstalled" | cut -d "/" -f1)
+    inOpt=$(echo "$whereIsInstalled" | cut -d "/" -f2)
+
+    # echo "whereIsInstalled:=> $whereIsInstalled"
+    # echo "if [[ $group == $inGroup && $opt == $inOpt ]]; then"
     if [[ "$group" == "$inGroup" && "$opt" == "$inOpt" ]]; then
-      echo "repo is already installed, updating..."
+      echo "repo $repository is already installed, updating..."
       git submodule update --remote "$pack_dir"
     else
       echo -e "Plugin installed in group: ${cyn}$inGroup${clr} option: ${cyn}$inOpt${clr}"
@@ -190,7 +209,7 @@ uninstall() {
   local group_dir="$PACK_PATH/$inGroup/$inOpt"
   local pack_dir="$group_dir/$package"
 
-  if [[ ! -z "$whereIsInstalled" ]]; then
+  if [[ -n "$whereIsInstalled" ]]; then
 
     echo "repo is already installed, deleting..."
     git submodule deinit -f "$pack_dir"
@@ -228,11 +247,8 @@ update() {
   fi
 
   for package in $packages; do
-    #pushd "$PACK_PATH"/"$package" || exit_pm
     echo -e "${ylw}Updating package ${cyn}$package${clr}"
     git submodule update --remote --merge "$PACK_PATH"/"$package"
-    #git commit -m "chore(pm): Update $plugin using the script pm"
-    #popd
   done
 
   echo -e "${grn}All packages updated.${clr}"
