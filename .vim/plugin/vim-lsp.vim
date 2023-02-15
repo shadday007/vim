@@ -1,15 +1,6 @@
 vim9script
 
-g:lsp_diagnostics_enabled = 1
-g:lsp_diagnostics_echo_cursor = 1
-g:lsp_diagnostics_float_cursor = 1
 g:lsp_semantic_enabled = 1
-
-g:lsp_completion_documentation_enabled = 1
-g:lsp_completion_documentation_delay = 1000
-
-# Move notification messages to the right
-g:lsp_diagnostics_virtual_text_enabled = 0
 
 # Gutter symbols
 g:lsp_document_code_action_signs_enabled = 1

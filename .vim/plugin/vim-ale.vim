@@ -1,7 +1,5 @@
 let g:ale_fix_on_save = 1
 let g:ale_lint_on_insert_leave = 1
-let g:ale_completion_autoimport = 1
-let g:ale_completion_enabled = 1
 
 let g:ale_sign_error = '✖'
 let g:ale_sign_warning = '➤'
@@ -10,6 +8,35 @@ let g:ale_virtualtext_cursor = 1
 let g:ale_virtualtext_prefix = "🔥 "
 
 let g:ale_set_quickfix = 1
+
+let g:ale_completion_symbols = {
+      \ 'text': '',
+      \ 'method': '',
+      \ 'function': '',
+      \ 'constructor': '',
+      \ 'field': '',
+      \ 'variable': '',
+      \ 'class': '',
+      \ 'interface': '',
+      \ 'module': '',
+      \ 'property': '',
+      \ 'unit': 'v',
+      \ 'value': 'v',
+      \ 'enum': 't',
+      \ 'keyword': 'v',
+      \ 'snippet': 'v',
+      \ 'color': 'v',
+      \ 'file': 'v',
+      \ 'reference': 'v',
+      \ 'folder': 'v',
+      \ 'enum_member': 'm',
+      \ 'constant': 'm',
+      \ 'struct': 't',
+      \ 'event': 'v',
+      \ 'operator': 'f',
+      \ 'type_parameter': 'p',
+      \ '<default>': 'v'
+      \ }
 
 let g:ale_linters = {
       \ 'c': ['clang'],
