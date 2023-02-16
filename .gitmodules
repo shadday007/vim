@@ -4,3 +4,12 @@
 [submodule ".vim/pack/git/start/vim-fugitive"]
 	path = .vim/pack/git/start/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
+[submodule ".vim/pack/colors/start/vim-nightfly-colors"]
+	path = .vim/pack/colors/start/vim-nightfly-colors
+	url = https://github.com/bluz71/vim-nightfly-colors.git
+[submodule ".vim/pack/colors/start/jellybeans.vim"]
+	path = .vim/pack/colors/start/jellybeans.vim
+	url = https://github.com/nanotech/jellybeans.vim.git
+[submodule ".vim/pack/colors/start/komau.vim"]
+	path = .vim/pack/colors/start/komau.vim
+	url = https://github.com/ntk148v/komau.vim.git

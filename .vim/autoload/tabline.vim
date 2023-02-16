@@ -136,7 +136,7 @@ export def Update_highlight()
       'fg': fg
     })
 
-  fg = synIDattr(synIDtrans(hlID("ErrorMsg")), "fg")
+  fg = synIDattr(synIDtrans(hlID("WarningMsg")), "fg")
   bg = synIDattr(synIDtrans(hlID("PmenuSel")), "bg")
   execute 'highlight TabLineSel ' ..
     pinnacle#highlight({
