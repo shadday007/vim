@@ -482,7 +482,7 @@ export def Update_highlight()
   execute 'highlight User7 ' ..
     pinnacle#highlight({
       'bg': fg,
-      'fg': pinnacle#extract_fg('Normal'),
+      'fg': 'black',
       'term': 'bold'
     })
 

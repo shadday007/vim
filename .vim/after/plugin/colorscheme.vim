@@ -6,13 +6,19 @@ def g:CheckColorScheme()
     g:base16colorspace = 256
   endif
 
-  if filereadable(expand("~/.vim/vimrc-colorscheme.vim"))
-    runtime vimrc-colorscheme.vim
+  if exists('g:load_this_colorscheme ')
+    execute 'colorscheme ' ..  g:load_this_colorscheme.colorscheme
+    execute 'set background=' .. g:load_this_colorscheme.background
+  else
+    if filereadable(expand("~/.vim/vimrc-colorscheme.vim"))
+      runtime vimrc-colorscheme.vim
+    endif
   endif
 
   doautocmd ColorScheme
 
   highlight CursorLineNR cterm=bold
+  highlight Normal guibg=NONE ctermbg=NONE
 
 enddef
 

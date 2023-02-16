@@ -8,5 +8,3 @@
 	path = .vim/pack/behavior/start/vim-which-key
 	url = https://github.com/liuchengxu/vim-which-key.git
 [submodule ".vim/pack/utilities/start/vim-startuptime"]
-	path = .vim/pack/utilities/start/vim-startuptime
-	url = https://github.com/dstein64/vim-startuptime.git
