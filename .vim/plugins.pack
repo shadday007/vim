@@ -13,10 +13,15 @@ group Git
 install tpope/vim-fugitive Git start # http://stackoverflow.com/a/1333025
 
 group Development
+#install neoclide/coc.nvim Development opt
+#for now:
+#cd ~/.vim/pack/development/opt
+#git submodule add -b release -f https://github.com/neoclide/coc.nvim.git
 
 group Languages
 
 group Utilities
+install rhysd/vim-healthcheck Utilities start
 install dstein64/vim-startuptime Utilities start
 
 list
