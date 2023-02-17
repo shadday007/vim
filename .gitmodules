@@ -55,6 +55,9 @@
 [submodule ".vim/pack/utilities/opt/vim-cheat40"]
 	path = .vim/pack/utilities/opt/vim-cheat40
 	url = https://github.com/lifepillar/vim-cheat40.git
+[submodule ".vim/pack/colors/start/vim-nightfly-colors"]
+	path = .vim/pack/colors/start/vim-nightfly-colors
+	url = https://github.com/bluz71/vim-nightfly-colors.git
 [submodule ".vim/pack/colors/start/jellybeans.vim"]
 	path = .vim/pack/colors/start/jellybeans.vim
 	url = https://github.com/nanotech/jellybeans.vim.git
@@ -121,6 +124,10 @@
 [submodule ".vim/pack/fuzzyfinder/opt/vim-grepper"]
 	path = .vim/pack/fuzzyfinder/opt/vim-grepper
 	url = https://github.com/mhinz/vim-grepper.git
-[submodule ".vim/pack/colors/start/vim-nightfly-colors"]
-	path = .vim/pack/colors/start/vim-nightfly-colors
-	url = https://github.com/bluz71/vim-nightfly-colors.git
+[submodule ".vim/pack/utilities/start/vim-healthcheck"]
+	path = .vim/pack/utilities/start/vim-healthcheck
+	url = https://github.com/rhysd/vim-healthcheck.git
+[submodule ".vim/pack/development/opt/coc.nvim"]
+	path = .vim/pack/development/opt/coc.nvim
+	url = https://github.com/neoclide/coc.nvim.git
+	branch = release

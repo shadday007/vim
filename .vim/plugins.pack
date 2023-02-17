@@ -64,6 +64,10 @@ install ludovicchabant/vim-gutentags Development start # for generate tags
 install skywind3000/gutentags_plus Development start # for switch gtags not work for now
 # config: ~/.vim/plugin/gutentags_plus.vim
 install tpope/vim-endwise Development start # for switch gtags not work for now
+#install neoclide/coc.nvim Development opt
+#for now:
+#cd ~/.vim/pack/development/opt
+#git submodule add -b release -f https://github.com/neoclide/coc.nvim.git
 
 # --------------------------------------------------
 group FuzzyFinder
@@ -83,6 +87,7 @@ install liuchengxu/vista.vim Lsp start # View and search LSP symbols, tags in Vi
 # --------------------------------------------------
 group Utilities
 # --------------------------------------------------
+install rhysd/vim-healthcheck Utilities start
 install dstein64/vim-startuptime Utilities start
 install chrisbra/unicode.vim Utilities opt
 install lifepillar/vim-cheat40 Utilities opt
