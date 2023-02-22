@@ -69,7 +69,7 @@ set mousemodel=popup
 set scrolloff=10       # Allows try to show 10 lines above and below the cursor location
 set number             # show line numbers
 set relativenumber
-set shortmess+=atOI    # use abbreviations in messages eg. `[RO]` instead of `[readonly]`
+set shortmess+=catOI   # use abbreviations in messages eg. `[RO]` instead of `[readonly]`
 set showcmd            # show command in bottom bar
 set wildignorecase     # Case insensitive in command-line mode
 set laststatus=2       # show always stausline
@@ -83,6 +83,7 @@ set updatetime=300
 set splitbelow         # Always split below
 set splitright         # Always split right
 set colorcolumn=85
+set signcolumn=number  # signs replace line numbers
 # By default timeoutlen is 1000 ms
 set timeoutlen=500
 # }}}
