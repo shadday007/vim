@@ -40,3 +40,36 @@
 [submodule ".vim/pack/behavior/start/vim-easy-align"]
 	path = .vim/pack/behavior/start/vim-easy-align
 	url = https://github.com/junegunn/vim-easy-align.git
+[submodule ".vim/pack/behavior/start/scratch.vim"]
+	path = .vim/pack/behavior/start/scratch.vim
+	url = https://github.com/mtth/scratch.vim.git
+[submodule ".vim/pack/appearance/start/indentline"]
+	path = .vim/pack/appearance/start/indentline
+	url = https://github.com/yggdroot/indentline.git
+[submodule ".vim/pack/development/start/vim-gutentags"]
+	path = .vim/pack/development/start/vim-gutentags
+	url = https://github.com/ludovicchabant/vim-gutentags.git
+[submodule ".vim/pack/development/start/gutentags_plus"]
+	path = .vim/pack/development/start/gutentags_plus
+	url = https://github.com/skywind3000/gutentags_plus.git
+[submodule ".vim/pack/lsp/start/vista.vim"]
+	path = .vim/pack/lsp/start/vista.vim
+	url = https://github.com/liuchengxu/vista.vim.git
+[submodule ".vim/pack/colors/start/sonokai"]
+	path = .vim/pack/colors/start/sonokai
+	url = https://github.com/sainnhe/sonokai.git
+[submodule ".vim/pack/colors/start/vim-colors"]
+	path = .vim/pack/colors/start/vim-colors
+	url = https://github.com/jakwings/vim-colors.git
+[submodule ".vim/pack/colors/start/vim-moonfly-colors"]
+	path = .vim/pack/colors/start/vim-moonfly-colors
+	url = https://github.com/bluz71/vim-moonfly-colors.git
+[submodule ".vim/pack/utilities/opt/vim-cheat40"]
+	path = .vim/pack/utilities/opt/vim-cheat40
+	url = https://github.com/lifepillar/vim-cheat40.git
+[submodule ".vim/pack/colors/start/vim-nightfly-colors"]
+	path = .vim/pack/colors/start/vim-nightfly-colors
+	url = https://github.com/bluz71/vim-nightfly-colors.git
+[submodule ".vim/pack/colors/start/jellybeans.vim"]
+	path = .vim/pack/colors/start/jellybeans.vim
+	url = https://github.com/nanotech/jellybeans.vim.git

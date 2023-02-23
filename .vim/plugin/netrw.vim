@@ -6,6 +6,8 @@ endif
 
 g:loaded_netrw_plugin = 1
 
+g:netrw_use_noswf = 0
+
 g:netrw_liststyle = 3
 
 g:netrw_altv = 1
