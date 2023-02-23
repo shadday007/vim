@@ -31,3 +31,12 @@
 [submodule ".vim/pack/utilities/opt/unicode.vim"]
 	path = .vim/pack/utilities/opt/unicode.vim
 	url = https://github.com/chrisbra/unicode.vim.git
+[submodule ".vim/pack/behavior/start/quick-scope"]
+	path = .vim/pack/behavior/start/quick-scope
+	url = https://github.com/unblevable/quick-scope.git
+[submodule ".vim/pack/behavior/start/vim-sneak"]
+	path = .vim/pack/behavior/start/vim-sneak
+	url = https://github.com/justinmk/vim-sneak.git
+[submodule ".vim/pack/behavior/start/vim-easy-align"]
+	path = .vim/pack/behavior/start/vim-easy-align
+	url = https://github.com/junegunn/vim-easy-align.git

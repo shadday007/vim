@@ -6,6 +6,9 @@ install tpope/vim-commentary behavior start
 install tpope/vim-unimpaired behavior start
 install tpope/vim-repeat behavior start
 install Raimondi/delimitMate behavior start
+install unblevable/quick-scope behavior start
+install justinmk/vim-sneak behavior start
+install junegunn/vim-easy-align behavior start
 #uninstall vim-qf
 
 group Colors

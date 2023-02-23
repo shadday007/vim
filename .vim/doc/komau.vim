@@ -1,0 +1,1 @@
+../pack/colors/start/komau.vim/doc
