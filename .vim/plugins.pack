@@ -1,7 +1,11 @@
 # admit line comment and blank lines
 group behavior
 install liuchengxu/vim-which-key behavior start
-#install tpope/vim-commentary behavior start
+install tpope/vim-suround behavior start
+install tpope/vim-commentary behavior start
+install tpope/vim-unimpaired behavior start
+install tpope/vim-repeat behavior start
+install Raimondi/delimitMate behavior start
 #uninstall vim-qf
 
 group Colors
@@ -10,7 +14,8 @@ install wincent/pinnacle Colors start # http://stackoverflow.com/a/1333025
 group Appearance
 
 group Git
-install tpope/vim-fugitive Git start # http://stackoverflow.com/a/1333025
+install tpope/vim-fugitive Git start # Git support
+install airblade/vim-gitgutter Git start # shows a git diff in the sign column
 
 group Development
 
@@ -18,5 +23,6 @@ group Languages
 
 group Utilities
 install dstein64/vim-startuptime Utilities start
+install chrisbra/unicode.vim Utilities opt
 
 list

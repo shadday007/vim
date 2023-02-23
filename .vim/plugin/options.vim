@@ -79,7 +79,7 @@ set lazyredraw
 set showmatch          # higlight matching parenthesis
 set fillchars+=vert:┃
 set diffopt=filler,vertical
-set updatetime=300
+set updatetime=100
 set splitbelow         # Always split below
 set splitright         # Always split right
 set colorcolumn=85
