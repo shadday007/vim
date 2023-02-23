@@ -1,7 +1,7 @@
 # admit line comment and blank lines
 group behavior
 install liuchengxu/vim-which-key behavior start
-install tpope/vim-suround behavior start
+install tpope/vim-surround behavior start
 install tpope/vim-commentary behavior start
 install tpope/vim-unimpaired behavior start
 install tpope/vim-repeat behavior start

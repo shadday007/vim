@@ -8,3 +8,26 @@
 	path = .vim/pack/behavior/start/vim-which-key
 	url = https://github.com/liuchengxu/vim-which-key.git
 [submodule ".vim/pack/utilities/start/vim-startuptime"]
+	path = .vim/pack/utilities/start/vim-startuptime
+	url = https://github.com/dstein64/vim-startuptime.git
+[submodule ".vim/pack/behavior/start/vim-surround"]
+	path = .vim/pack/behavior/start/vim-surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule ".vim/pack/behavior/start/vim-commentary"]
+	path = .vim/pack/behavior/start/vim-commentary
+	url = https://github.com/tpope/vim-commentary.git
+[submodule ".vim/pack/behavior/start/vim-unimpaired"]
+	path = .vim/pack/behavior/start/vim-unimpaired
+	url = https://github.com/tpope/vim-unimpaired.git
+[submodule ".vim/pack/behavior/start/vim-repeat"]
+	path = .vim/pack/behavior/start/vim-repeat
+	url = https://github.com/tpope/vim-repeat.git
+[submodule ".vim/pack/behavior/start/delimitmate"]
+	path = .vim/pack/behavior/start/delimitmate
+	url = https://github.com/raimondi/delimitmate.git
+[submodule ".vim/pack/git/start/vim-gitgutter"]
+	path = .vim/pack/git/start/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
+[submodule ".vim/pack/utilities/opt/unicode.vim"]
+	path = .vim/pack/utilities/opt/unicode.vim
+	url = https://github.com/chrisbra/unicode.vim.git
