@@ -1,19 +1,29 @@
 # admit line comment and blank lines
+# --------------------------------------------------
 group behavior
+# --------------------------------------------------
 install liuchengxu/vim-which-key behavior start
 install tpope/vim-surround behavior start
 install tpope/vim-commentary behavior start
 install tpope/vim-unimpaired behavior start
 install tpope/vim-repeat behavior start
 install Raimondi/delimitMate behavior start
+# config: ~/.vim/plugin/delimitmate.vim
 install unblevable/quick-scope behavior start
+# config: ~/.vim/plugin/quick-scope.vim
 install justinmk/vim-sneak behavior start
+# config: ~/.vim/plugin/vim-sneak.vim
 install junegunn/vim-easy-align behavior start
+# config: ~/.vim/plugin/vim-easy-align.vim
 install mtth/scratch.vim behavior start
+# config: ~/.vim/plugin/scratch.vim
 install chrisbra/unicode.vim behavior start
 #uninstall vim-qf
 
+# --------------------------------------------------
 group Colors
+# config: ~/.vim/plugin/colorscheme.vim
+# --------------------------------------------------
 install wincent/pinnacle Colors start # http://stackoverflow.com/a/1333025
 install sainnhe/sonokai Colors start # Vim Color Schemes
 install jakwings/vim-colors Colors start # Vim Color Schemes
@@ -21,24 +31,37 @@ install bluz71/vim-moonfly-colors Colors start # Vim Color Schemes
 install bluz71/vim-nightfly-colors Colors start # Vim Color Schemes
 install nanotech/jellybeans.vim Colors start # Vim Color Schemes
 
+# --------------------------------------------------
 group Appearance
+# --------------------------------------------------
 install Yggdroot/indentLine Appearance start # displaying thin vertical lines at each indentation level
+# config: ~/.vim/plugin/indentline.vim
 
+# --------------------------------------------------
 group Git
+# --------------------------------------------------
 install tpope/vim-fugitive Git start # Git support
 install airblade/vim-gitgutter Git start # shows a git diff in the sign column
 
+# --------------------------------------------------
 group Development
+# --------------------------------------------------
 install ludovicchabant/vim-gutentags Development start # for generate tags
 install skywind3000/gutentags_plus Development start # for switch gtags not work for now
 
-
+# --------------------------------------------------
 group Lsp
+# --------------------------------------------------
 install liuchengxu/vista.vim Lsp start # View and search LSP symbols, tags in Vim
+# config: ~/.vim/plugin/vista.vim
 
+# --------------------------------------------------
 group Utilities
+# --------------------------------------------------
 install dstein64/vim-startuptime Utilities start
 install chrisbra/unicode.vim Utilities opt
 install lifepillar/vim-cheat40 Utilities opt
 
+# --------------------------------------------------
 list
+# --------------------------------------------------
