@@ -73,3 +73,12 @@
 [submodule ".vim/pack/colors/start/jellybeans.vim"]
 	path = .vim/pack/colors/start/jellybeans.vim
 	url = https://github.com/nanotech/jellybeans.vim.git
+[submodule ".vim/pack/behavior/start/vim-signature"]
+	path = .vim/pack/behavior/start/vim-signature
+	url = https://github.com/kshenoy/vim-signature.git
+[submodule ".vim/pack/syntax/start/vim-polyglot"]
+	path = .vim/pack/syntax/start/vim-polyglot
+	url = https://github.com/sheerun/vim-polyglot.git
+[submodule ".vim/pack/syntax/start/vim9-syntax"]
+	path = .vim/pack/syntax/start/vim9-syntax
+	url = https://github.com/lacygoill/vim9-syntax.git

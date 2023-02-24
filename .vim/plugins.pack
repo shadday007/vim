@@ -7,6 +7,7 @@ install tpope/vim-surround behavior start
 install tpope/vim-commentary behavior start
 install tpope/vim-unimpaired behavior start
 install tpope/vim-repeat behavior start
+install kshenoy/vim-signature behavior start # place, toggle and display marks
 install Raimondi/delimitMate behavior start
 # config: ~/.vim/plugin/delimitmate.vim
 install unblevable/quick-scope behavior start
@@ -36,6 +37,12 @@ group Appearance
 # --------------------------------------------------
 install Yggdroot/indentLine Appearance start # displaying thin vertical lines at each indentation level
 # config: ~/.vim/plugin/indentline.vim
+
+# --------------------------------------------------
+group Syntax
+# --------------------------------------------------
+install sheerun/vim-polyglot Syntax start
+install lacygoill/vim9-syntax Syntax start
 
 # --------------------------------------------------
 group Git

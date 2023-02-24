@@ -40,10 +40,10 @@ inoremap <C-l> <Right>
 # Bash like
 inoremap <C-a> <C-O>^
 inoremap <C-X><C-A> <C-A>
-inoremap <expr> <C-B> getline('.')=~'^\s*$'&&col('.') > strlen(getline('.')) ? "0\<Lt>C-D>\<Lt>Esc>kJs" : "\<Lt>Left>"
+inoremap <expr> <C-B> getline('.') =~ '^\s*$' && col('.') > strlen(getline('.')) ? "0\<Lt>C-D>\<Lt>Esc>kJs" : "\<Lt>Left>"
 inoremap <expr><C-e> pumvisible() ? "\<C-e>" : "\<End>"
 inoremap <expr> <C-D> col('.') > strlen(getline('.')) ? "\<Lt>C-D>" : "\<Lt>Del>"
-inoremap <expr> <C-E> col('.') > strlen(getline('.'))<bar><bar>pumvisible() ? "\<Lt>C-E>" : "\<Lt>End>"
+inoremap <expr> <C-E> col('.') > strlen(getline('.')) <bar><bar> pumvisible() ? "\<Lt>C-E>" : "\<Lt>End>"
 inoremap <expr> <C-F> col('.') > strlen(getline('.')) ? "\<Lt>C-F>" : "\<Lt>Right>"
 inoremap <C-w> <C-[>diwa
 inoremap <C-u> <C-G>u<C-U>
