@@ -16,21 +16,12 @@
 [submodule ".vim/pack/behavior/start/vim-commentary"]
 	path = .vim/pack/behavior/start/vim-commentary
 	url = https://github.com/tpope/vim-commentary.git
-[submodule ".vim/pack/behavior/start/vim-unimpaired"]
-	path = .vim/pack/behavior/start/vim-unimpaired
-	url = https://github.com/tpope/vim-unimpaired.git
 [submodule ".vim/pack/behavior/start/vim-repeat"]
 	path = .vim/pack/behavior/start/vim-repeat
 	url = https://github.com/tpope/vim-repeat.git
-[submodule ".vim/pack/behavior/start/delimitmate"]
-	path = .vim/pack/behavior/start/delimitmate
-	url = https://github.com/raimondi/delimitmate.git
 [submodule ".vim/pack/git/start/vim-gitgutter"]
 	path = .vim/pack/git/start/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
-[submodule ".vim/pack/utilities/opt/unicode.vim"]
-	path = .vim/pack/utilities/opt/unicode.vim
-	url = https://github.com/chrisbra/unicode.vim.git
 [submodule ".vim/pack/behavior/start/quick-scope"]
 	path = .vim/pack/behavior/start/quick-scope
 	url = https://github.com/unblevable/quick-scope.git
@@ -58,9 +49,6 @@
 [submodule ".vim/pack/colors/start/sonokai"]
 	path = .vim/pack/colors/start/sonokai
 	url = https://github.com/sainnhe/sonokai.git
-[submodule ".vim/pack/colors/start/vim-colors"]
-	path = .vim/pack/colors/start/vim-colors
-	url = https://github.com/jakwings/vim-colors.git
 [submodule ".vim/pack/colors/start/vim-moonfly-colors"]
 	path = .vim/pack/colors/start/vim-moonfly-colors
 	url = https://github.com/bluz71/vim-moonfly-colors.git
@@ -76,9 +64,63 @@
 [submodule ".vim/pack/behavior/start/vim-signature"]
 	path = .vim/pack/behavior/start/vim-signature
 	url = https://github.com/kshenoy/vim-signature.git
-[submodule ".vim/pack/syntax/start/vim-polyglot"]
-	path = .vim/pack/syntax/start/vim-polyglot
-	url = https://github.com/sheerun/vim-polyglot.git
 [submodule ".vim/pack/syntax/start/vim9-syntax"]
 	path = .vim/pack/syntax/start/vim9-syntax
 	url = https://github.com/lacygoill/vim9-syntax.git
+[submodule ".vim/pack/syntax/start/vim-js"]
+	path = .vim/pack/syntax/start/vim-js
+	url = https://github.com/yuezk/vim-js.git
+[submodule ".vim/pack/syntax/start/vim-jsx-typescript"]
+	path = .vim/pack/syntax/start/vim-jsx-typescript
+	url = https://github.com/peitalin/vim-jsx-typescript.git
+[submodule ".vim/pack/syntax/start/vim-graphql"]
+	path = .vim/pack/syntax/start/vim-graphql
+	url = https://github.com/jparise/vim-graphql.git
+[submodule ".vim/pack/development/start/vim-endwise"]
+	path = .vim/pack/development/start/vim-endwise
+	url = https://github.com/tpope/vim-endwise.git
+[submodule ".vim/pack/behavior/opt/vim-unimpaired"]
+	path = .vim/pack/behavior/opt/vim-unimpaired
+	url = https://github.com/tpope/vim-unimpaired.git
+[submodule ".vim/pack/syntax/opt/vim-polyglot"]
+	path = .vim/pack/syntax/opt/vim-polyglot
+	url = https://github.com/sheerun/vim-polyglot.git
+[submodule ".vim/pack/syntax/start/vim-jsx-pretty"]
+	path = .vim/pack/syntax/start/vim-jsx-pretty
+	url = https://github.com/maxmellon/vim-jsx-pretty.git
+[submodule ".vim/pack/behavior/start/vim-vinegar"]
+	path = .vim/pack/behavior/start/vim-vinegar
+	url = https://github.com/tpope/vim-vinegar.git
+[submodule ".vim/pack/behavior/start/delimitmate"]
+	path = .vim/pack/behavior/start/delimitmate
+	url = https://github.com/raimondi/delimitmate.git
+[submodule ".vim/pack/utilities/opt/unicode.vim"]
+	path = .vim/pack/utilities/opt/unicode.vim
+	url = https://github.com/chrisbra/unicode.vim.git
+[submodule ".vim/pack/utilities/opt/goyo.vim"]
+	path = .vim/pack/utilities/opt/goyo.vim
+	url = https://github.com/junegunn/goyo.vim.git
+[submodule ".vim/pack/utilities/opt/vim-mundo"]
+	path = .vim/pack/utilities/opt/vim-mundo
+	url = https://github.com/simnalamburt/vim-mundo.git
+[submodule ".vim/pack/utilities/opt/undotree"]
+	path = .vim/pack/utilities/opt/undotree
+	url = https://github.com/mbbill/undotree.git
+[submodule ".vim/pack/git/opt/gv.vim"]
+	path = .vim/pack/git/opt/gv.vim
+	url = https://github.com/junegunn/gv.vim.git
+[submodule ".vim/pack/git/opt/vim-flog"]
+	path = .vim/pack/git/opt/vim-flog
+	url = https://github.com/rbong/vim-flog.git
+[submodule ".vim/pack/fuzzyfinder/start/fzf"]
+	path = .vim/pack/fuzzyfinder/start/fzf
+	url = https://github.com/junegunn/fzf.git
+[submodule ".vim/pack/fuzzyfinder/start/fzf.vim"]
+	path = .vim/pack/fuzzyfinder/start/fzf.vim
+	url = https://github.com/junegunn/fzf.vim.git
+[submodule ".vim/pack/fuzzyfinder/start/fzf-mru.vim"]
+	path = .vim/pack/fuzzyfinder/start/fzf-mru.vim
+	url = https://github.com/pbogut/fzf-mru.vim.git
+[submodule ".vim/pack/fuzzyfinder/opt/vim-grepper"]
+	path = .vim/pack/fuzzyfinder/opt/vim-grepper
+	url = https://github.com/mhinz/vim-grepper.git

@@ -5,7 +5,9 @@ group behavior
 install liuchengxu/vim-which-key behavior start
 install tpope/vim-surround behavior start
 install tpope/vim-commentary behavior start
-install tpope/vim-unimpaired behavior start
+install tpope/vim-vinegar behavior start
+install tpope/vim-unimpaired behavior opt
+# load in: ~/.vim/plugin/defer_plugins.vim
 install tpope/vim-repeat behavior start
 install kshenoy/vim-signature behavior start # place, toggle and display marks
 install Raimondi/delimitMate behavior start
@@ -18,7 +20,6 @@ install junegunn/vim-easy-align behavior start
 # config: ~/.vim/plugin/vim-easy-align.vim
 install mtth/scratch.vim behavior start
 # config: ~/.vim/plugin/scratch.vim
-install chrisbra/unicode.vim behavior start
 #uninstall vim-qf
 
 # --------------------------------------------------
@@ -26,8 +27,6 @@ group Colors
 # config: ~/.vim/plugin/colorscheme.vim
 # --------------------------------------------------
 install wincent/pinnacle Colors start # http://stackoverflow.com/a/1333025
-install sainnhe/sonokai Colors start # Vim Color Schemes
-install jakwings/vim-colors Colors start # Vim Color Schemes
 install bluz71/vim-moonfly-colors Colors start # Vim Color Schemes
 install bluz71/vim-nightfly-colors Colors start # Vim Color Schemes
 install nanotech/jellybeans.vim Colors start # Vim Color Schemes
@@ -41,20 +40,39 @@ install Yggdroot/indentLine Appearance start # displaying thin vertical lines at
 # --------------------------------------------------
 group Syntax
 # --------------------------------------------------
-install sheerun/vim-polyglot Syntax start
+install sheerun/vim-polyglot Syntax opt
 install lacygoill/vim9-syntax Syntax start
+install yuezk/vim-js Syntax start # javascript
+install maxmellon/vim-jsx-pretty Syntax start # javascript
+# config: ~/.vim/plugin/vim-jsx-pretty.vim
+install peitalin/vim-jsx-typescript Syntax start # typescript
+install jparise/vim-graphql Syntax start # graphql
 
 # --------------------------------------------------
 group Git
 # --------------------------------------------------
 install tpope/vim-fugitive Git start # Git support
 install airblade/vim-gitgutter Git start # shows a git diff in the sign column
+install junegunn/gv.vim Git opt # A git commit browser
+install rbong/vim-flog Git opt # A git commit browser
+# config: ~/.vim/plugin/optplugins.vim
 
 # --------------------------------------------------
 group Development
 # --------------------------------------------------
 install ludovicchabant/vim-gutentags Development start # for generate tags
 install skywind3000/gutentags_plus Development start # for switch gtags not work for now
+# config: ~/.vim/plugin/gutentags_plus.vim
+install tpope/vim-endwise Development start # for switch gtags not work for now
+
+# --------------------------------------------------
+group FuzzyFinder
+# --------------------------------------------------
+install junegunn/fzf FuzzyFinder start # fzf is a general-purpose command-line fuzzy finder
+install junegunn/fzf.vim FuzzyFinder start # fzf is a general-purpose command-line fuzzy finder
+install pbogut/fzf-mru.vim FuzzyFinder start # fzf is a general-purpose command-line fuzzy finder
+install mhinz/vim-grepper FuzzyFinder opt # Use your favorite grep tool to start an asynchronous search
+# config: ~/.vim/plugin/optplugins.vim
 
 # --------------------------------------------------
 group Lsp
@@ -68,7 +86,13 @@ group Utilities
 install dstein64/vim-startuptime Utilities start
 install chrisbra/unicode.vim Utilities opt
 install lifepillar/vim-cheat40 Utilities opt
+install junegunn/goyo.vim Utilities opt
+# config: ~/.vim/plugin/optplugins.vim
+install simnalamburt/vim-mundo Utilities opt
+install mbbill/undotree Utilities opt
 
 # --------------------------------------------------
 list
 # --------------------------------------------------
+
+# vim: set ft=conf:

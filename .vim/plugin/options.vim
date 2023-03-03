@@ -18,7 +18,7 @@ set expandtab           # use spaces for tabs
 set softtabstop=2       # 2 space tab
 set shiftwidth=2
 set modeline
-set modelines=1
+set modelines=2
 # }}}
 
 # Search Options {{{1
@@ -86,6 +86,7 @@ set colorcolumn=85
 set signcolumn=number  # signs replace line numbers
 # By default timeoutlen is 1000 ms
 set timeoutlen=500
+
 # }}}
 
 # Code Folding Options {{{1
