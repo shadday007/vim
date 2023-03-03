@@ -7,8 +7,8 @@ def g:CheckColorScheme()
   endif
 
   if exists('g:load_this_colorscheme ')
-    execute 'colorscheme ' ..  g:load_this_colorscheme.colorscheme
     execute 'set background=' .. g:load_this_colorscheme.background
+    execute 'colorscheme ' ..  g:load_this_colorscheme.colorscheme
   else
     if filereadable(expand("~/.vim/vimrc-colorscheme.vim"))
       runtime vimrc-colorscheme.vim
@@ -18,7 +18,11 @@ def g:CheckColorScheme()
   doautocmd ColorScheme
 
   highlight CursorLineNR cterm=bold
-  highlight Normal guibg=NONE ctermbg=NONE
+
+  if get(g:, 'background_transparent', false) && !has('gui_running')
+    highlight Normal guibg=NONE ctermbg=NONE
+    highlight NonText ctermbg=NONE guibg=NONE
+  endif
 
 enddef
 
