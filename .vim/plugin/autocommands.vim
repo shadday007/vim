@@ -10,6 +10,17 @@ def Trim_white_space(): void
   execute :%s/\s\+$//e
 enddef
 
+def Idleboot()
+  # Make sure we automatically call Idleboot() only once.
+  augroup idleboot
+    autocmd!
+  augroup END
+
+  # Make sure we run deferred tasks exactly once.
+  doautocmd User Defer
+  autocmd! User Defer
+enddef
+
 def AutoCommands(): void
 
   # Create directories before write
@@ -72,11 +83,11 @@ def AutoCommands(): void
   augroup idleboot
     autocmd!
     if has('vim_starting')
-      autocmd CursorHold,CursorHoldI * ++once doautocmd User Defer
+      autocmd CursorHold,CursorHoldI * ++once Idleboot()
     endif
   augroup END
 
-  autocmd User Defer echo "Executing User Deferring commands"
+  autocmd User Defer echom "Executing User Deferring commands"
 enddef
 
 AutoCommands()
