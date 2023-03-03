@@ -23,7 +23,7 @@ command! Gitconfig edit ~/.gitconfig
 command! MyDiary edit ~/Dropbox/notes/notes.md
 command! MyTODO edit ~/Dropbox/notes/todo.md
 
-command FindTodos noautocmd vimgrep /\v\C<(TODO|FIXME|CHANGED|XXX|BUG|HACK)>/j ** | cw
-command FindNotes noautocmd vimgrep /\C\W\zs\(NOTE\|INFO\|IDEA\)/j ** | cw
-command FindDebugs noautocmd vimgrep /\C\W\zs\(HELP\|DEBUG\)/j ** | cw
-command FindErrors noautocmd vimgrep /\C\W\zs\(ERROR\|FATAL\)/j ** | cw
+command Todo noautocmd Grep '\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\):' ** | cwindow
+command Note noautocmd Grep '\(NOTE\|INFO\|IDEA\):' ** | cwindow
+command Debug noautocmd Grep '\(HELP\|DEBUG\):' ** | cwindow
+command Error noautocmd Grep '\(ERROR\|FATAL\):' ** | cwindow
