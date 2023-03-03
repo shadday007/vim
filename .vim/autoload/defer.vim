@@ -15,6 +15,6 @@ export def Defer(evalable: string)
 enddef
 
 # Convenience function specifically for defering a `:packadd` operation.
-export def Packadd(pack: string, plugin: string)
-  execute "Defer('lazyload.Packadd(\"' .. pack .. '\", \"' .. plugin .. '\")')"
+export def Packadd(pack: string)
+  execute "Defer('lazyload.Packadd(\"" .. pack .. "\")')"
 enddef
