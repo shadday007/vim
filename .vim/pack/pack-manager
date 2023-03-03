@@ -134,8 +134,9 @@ rmgroup() {
 
 isInstalled() {
   local package=$1
+  local plugins=$(list | grep "$package")
 
-  for p in $(list | grep "$package"); do
+  for p in "$plugins"; do
     if [[ $package == $(echo "$p" | cut -d "/" -f3) ]]; then
       echo "$p"
       break
@@ -173,10 +174,11 @@ install() {
     # echo "whereIsInstalled:=> $whereIsInstalled"
     # echo "if [[ $group == $inGroup && $opt == $inOpt ]]; then"
     if [[ "$group" == "$inGroup" && "$opt" == "$inOpt" ]]; then
-      echo "repo $repository is already installed, updating..."
-      git submodule update --remote "$pack_dir"
+      echo "repo $repository is already installed. Skip it."
+      #echo "repo $repository is already installed, updating..."
+      #git submodule update --remote "$pack_dir"
     else
-      echo -e "Plugin installed in group: ${cyn}$inGroup${clr} option: ${cyn}$inOpt${clr}"
+      echo -e "Plugin ${pur}$package${clr} installed in group: ${cyn}$inGroup${clr} option: ${cyn}$inOpt${clr}"
       echo -e "Please uninstall first."
     fi
   else
