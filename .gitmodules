@@ -131,3 +131,15 @@
 	path = .vim/pack/development/opt/coc.nvim
 	url = https://github.com/neoclide/coc.nvim.git
 	branch = release
+||||||| 877eff6
+=======
+	path = .vim/pack/utilities/start/vim-startuptime
+	url = https://github.com/dstein64/vim-startuptime.git
+[submodule ".vim/pack/utilities/start/vim-healthcheck"]
+	path = .vim/pack/utilities/start/vim-healthcheck
+	url = https://github.com/rhysd/vim-healthcheck.git
+[submodule ".vim/pack/development/opt/coc.nvim"]
+	path = .vim/pack/development/opt/coc.nvim
+	url = https://github.com/neoclide/coc.nvim.git
+	branch = release
+>>>>>>> refs/remotes/origin/lsp-coc
