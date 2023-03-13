@@ -70,20 +70,3 @@ command Todo noautocmd Grep '\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\):' ** | cwi
 command Note noautocmd Grep '\(NOTE\|INFO\|IDEA\):' ** | cwindow
 command Debug noautocmd Grep '\(HELP\|DEBUG\):' ** | cwindow
 command Error noautocmd Grep '\(ERROR\|FATAL\):' ** | cwindow
-
-# TODO: 2023-03-13(shadday): Move abbreviations to plugin/abbreviations.vim
-iabbrev todo: TODO:<space><c-r>=strftime("%Y-%m-%d")<cr>(<c-r>=expand("$USER")<cr>):
-iabbrev fixme: FIXME:<space><c-r>=strftime("%Y-%m-%d")<cr>(<c-r>=expand("$USER")<cr>):
-iabbrev xxx: XXX:<space><c-r>=strftime("%Y-%m-%d")<cr>(<c-r>=expand("$USER")<cr>):
-iabbrev note: NOTE:<space><c-r>=strftime("%Y-%m-%d")<cr>(<c-r>=expand("$USER")<cr>):
-
-iabbr _date <c-r>=strftime("%Y-%m-%d")<cr>
-iabbr _time <c-r>=strftime("%H:%M:%S")<cr>
-iabbr _now <c-r>=strftime("%A, %B %d, %H:%M")<cr>
-
-iabbrev _shrug ¯\_(ツ)_/¯
-iabbrev _sad  (︶︹︺)
-
-iabbrev <buffer> --- --------------------{{{
-
-iabbrev  rg Regards,<CR>Jorge Luis Hernández
