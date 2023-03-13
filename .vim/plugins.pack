@@ -90,6 +90,7 @@ install junegunn/goyo.vim Utilities opt
 # config: ~/.vim/plugin/optplugins.vim
 install simnalamburt/vim-mundo Utilities opt
 install mbbill/undotree Utilities opt
+install powerman/vim-plugin-AnsiEsc Utilities opt
 
 # --------------------------------------------------
 list

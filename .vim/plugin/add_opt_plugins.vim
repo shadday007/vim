@@ -96,3 +96,10 @@ lazyload.Lazy({
     'grepper#GrepperUserCommands()',
   ]
 })
+
+lazyload.Lazy({
+  'plugin': 'vim-plugin-ansiesc',
+  'commands': {
+    'AnsiEsc': '-nargs=? -bar -bang'
+  }
+})
