@@ -124,3 +124,6 @@
 [submodule ".vim/pack/colors/start/vim-nightfly-colors"]
 	path = .vim/pack/colors/start/vim-nightfly-colors
 	url = https://github.com/bluz71/vim-nightfly-colors.git
+[submodule ".vim/pack/utilities/opt/vim-plugin-ansiesc"]
+	path = .vim/pack/utilities/opt/vim-plugin-ansiesc
+	url = https://github.com/powerman/vim-plugin-ansiesc.git
