@@ -3,6 +3,10 @@ vim9script
 g:git_infos = {'dir': '', 'branch': '', 'prev_dir': '', 'is_root': false}
 var git = g:git_infos
 
+var spinner = ["◐", "◓", "◑", "◒"]
+final spinner_len = len(spinner)
+var spinner_idx = -1
+
 var is_fugitive = exists('g:loaded_fugitive')
 var is_gui = has('gui_running')
 var ispadding: bool = false
@@ -135,13 +139,35 @@ export def NumStatus(): void
   endif
 enddef
 
+export def JobAddProgress(): void
+  spinner_idx += 1
+  if spinner_idx == spinner_len
+    spinner_idx = 0
+  endif
+enddef
+
+export def JobStop(): void
+  spinner_idx = -1
+enddef
+
+def JobIcon(): string
+  var icon: string = ''
+
+  if spinner_idx >= 0
+    icon = spinner[spinner_idx]
+  endif
+
+  return icon
+enddef
+
 def Lhs(): string
   var lhs: string = hi_lhs
   if ispadding
     lhs ..= Gutterpadding()
   endif
 
-  lhs ..= BufnrWinnr() .. ReadOnly() .. IsModified() .. Cap_indicator .. Num_indicator
+  lhs ..= BufnrWinnr() .. ReadOnly() .. IsModified()
+    .. Cap_indicator .. Num_indicator .. JobIcon()
 
   lhs ..= LeftSeparator()
   return lhs

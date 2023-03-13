@@ -6,8 +6,53 @@ endif
 
 g:loaded_commands_plugin = 1
 
+import autoload "statusline.vim"
+
+var shell_job: number
+
+def CallStop(timer: number): void
+  statusline.JobStop()
+enddef
+
+# Function handling the shell exits: close the window.
+def JobExit(job: job, status: number)
+  timer_start(3000, 'CallStop')
+enddef
+
+# Function handling output from the shell: Add it above the prompt.
+def GotOutput(channel: channel, msg: string)
+  statusline.JobAddProgress()
+  redrawstatus
+enddef
+
+def PackComplete(ArgLead: string, CmdLine: string, CursorPos: number): list<string>
+  var list: list<string> = [
+    'group',
+    'rmgroup',
+    'install',
+    'uninstall',
+    'list',
+    'update',
+    'clean',
+    'gendocs',
+    'process',
+  ]
+  return list->filter((_, l) => l =~ ArgLead)
+enddef
+
 # Run the pack-manager bash script
-command! -nargs=* -complete=command  PackManager  !~/.vim/pack/pack-manager <args>
+command! -nargs=* -bang -complete=customlist,PackComplete  PackManager {
+  var cmd = $HOME .. '/.vim/pack/pack-manager ' .. '<args>'
+  var opts = {}
+  opts.term_finish = 'open'
+  opts.hidden = 1
+  opts.out_msg = 0
+  opts.vertical = 1
+  opts.callback = 'GotOutput'
+  opts.exit_cb = 'JobExit'
+  opts.term_name = 'pack_terminal'
+  shell_job = term_start(cmd, opts)
+}
 
 # Shortcuts for access files
 command! Vimrc edit ~/.vim/vimrc
