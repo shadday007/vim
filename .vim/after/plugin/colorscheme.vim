@@ -24,6 +24,10 @@ def g:CheckColorScheme()
     highlight NonText ctermbg=NONE guibg=NONE
   endif
 
+  highlight SpellBad   term=underline cterm=underline ctermfg=4 ctermbg=NONE gui=undercurl guisp=#fc514e
+  highlight SpellCap   term=underline cterm=underline ctermfg=5 ctermbg=NONE gui=undercurl guisp=#82aaff
+  highlight SpellRare  term=underline cterm=underline ctermfg=6 ctermbg=NONE gui=undercurl guisp=#e3d18a
+  highlight SpellLocal term=underline cterm=underline ctermfg=6 ctermbg=NONE gui=undercurl guisp=#82aaff
 enddef
 
 if has('autocmd')
