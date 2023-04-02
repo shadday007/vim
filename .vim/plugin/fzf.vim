@@ -6,6 +6,8 @@ endif
 
 g:loaded_fzf_plugin = 1
 
+logger#Trace('Enter in: ' .. substitute(expand('<stack>'), '.*\(\.\.|\s\)', '', ''))
+
 # Use vim window popup
 # g:fzf_layout = { 'window': { 'width': 1, 'height': 0.4, 'yoffset': 1.0, 'border': 'top', 'highlight': 'Todo' } }
 g:fzf_layout = { 'down': '~40%' } # use terminal window

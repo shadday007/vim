@@ -4,6 +4,8 @@ endif
 
 let g:loaded_grep_plugin = 1
 
+call logger#Trace('Enter in: ' .. substitute(expand('<stack>'), '.*\(\.\.|\s\)', '', ''))
+
 " Format grerep configuration {{{2
 " Use ripgrep as the grep tool candidate for grep.vim
 set grepprg=rg\ --vimgrep\ --smart-case

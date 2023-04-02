@@ -1,5 +1,13 @@
 vim9script
 
+if exists("g:loaded_vista_plugin")
+  finish
+endif
+
+g:loaded_vista_plugin = 1
+
+logger#Trace('Enter in: ' .. substitute(expand('<stack>'), '.*\(\.\.|\s\)', '', ''))
+
 # How each level is indented and what to prepend.
 # This could make the display more compact or more spacious.
 # e.g., more compact: ["▸ \", \"\"]

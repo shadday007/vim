@@ -6,6 +6,8 @@ endif
 
 g:loaded_easy_align_plugin = 1
 
+logger#Trace('Enter in: ' .. substitute(expand('<stack>'), '.*\(\.\.|\s\)', '', ''))
+
 # Start interactive EasyAlign in visual mode (e.g. vipea)
 xmap ea <Plug>(EasyAlign)
 

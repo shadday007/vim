@@ -1,5 +1,7 @@
 vim9script
 
+logger#Trace('Enter in: ' .. substitute(expand('<stack>'), '.*\(\.\.|\s\)', '', ''))
+
 nnoremap <silent> <Leader>dm :DelimitMateSwitch<CR>
 # delimitMate_map                                              *delimitMate_map*
 

@@ -6,6 +6,8 @@ endif
 
 g:loaded_gutentags_plus_plugin = 1
 
+logger#Trace('Enter in: ' .. substitute(expand('<stack>'), '.*\(\.\.|\s\)', '', ''))
+
 # configuration for gutentags_plus plugin
 
 g:gutentags_ctags_exclude_wildignore = 1

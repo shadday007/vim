@@ -6,6 +6,8 @@ endif
 
 g:loaded_defer_plugins_plugin = 1
 
+logger#Trace('Enter in: ' .. substitute(expand('<stack>'), '.*\(\.\.|\s\)', '', ''))
+
 import autoload "defer.vim"
 
 import autoload "lazyload.vim"

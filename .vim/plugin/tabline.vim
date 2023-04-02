@@ -6,6 +6,8 @@ endif
 
 g:loaded_tabline_plugin = 1
 
+logger#Trace('Enter in: ' .. substitute(expand('<stack>'), '.*\(\.\.|\s\)', '', ''))
+
 import autoload "tabline.vim"
 
 if has('windows')

@@ -6,6 +6,8 @@ endif
 
 g:loaded_commands_plugin = 1
 
+logger#Trace('Enter in: ' .. substitute(expand('<stack>'), '.*\(\.\.|\s\)', '', ''))
+
 import autoload "statusline.vim"
 
 var shell_job: number
@@ -15,7 +17,10 @@ def CallStop(timer: number): void
 enddef
 
 def JobExit(job: job, status: number)
-  timer_start(3000, 'CallStop')
+  var ch = job_getchannel(job)
+  while ch_status(ch) ==# 'open' | sleep 1ms | endwhile
+  while ch_status(ch) ==# 'buffered' | sleep 1ms | endwhile
+  timer_start(10, 'CallStop')
 enddef
 
 def GotOutput(channel: channel, msg: string)

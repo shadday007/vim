@@ -6,6 +6,8 @@ endif
 
 g:loaded_colorscheme_plugin = 1
 
+logger#Trace('Enter in: ' .. substitute(expand('<stack>'), '.*\(\.\.|\s\)', '', ''))
+
 # config for nightfly colorscheme
 # g:nightflyCursorColor = v:true
 

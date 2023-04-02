@@ -6,6 +6,8 @@ endif
 
 g:loaded_netrw_plugin = 1
 
+logger#Trace('Enter in: ' .. substitute(expand('<stack>'), '.*\(\.\.|\s\)', '', ''))
+
 g:netrw_use_noswf = 0
 
 g:netrw_liststyle = 0

@@ -6,6 +6,8 @@ endif
 
 g:loaded_autocommands_plugin = 1
 
+logger#Trace('Enter in: ' .. substitute(expand('<stack>'), '.*\(\.\.|\s\)', '', ''))
+
 def Trim_white_space(): void
   execute :%s/\s\+$//e
 enddef

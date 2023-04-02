@@ -6,6 +6,8 @@ endif
 
 g:loaded_options_plugin = 1
 
+logger#Trace('Enter in: ' .. substitute(expand('<stack>'), '.*\(\.\.|\s\)', '', ''))
+
 # Indention Options {{{1
 filetype indent plugin on
 set backspace=indent,eol,start # Makes the backspace key behave like you'd expect

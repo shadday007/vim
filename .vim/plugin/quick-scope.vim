@@ -6,6 +6,8 @@ endif
 
 g:loaded_quick_scope_plugin = 1
 
+logger#Trace('Enter in: ' .. substitute(expand('<stack>'), '.*\(\.\.|\s\)', '', ''))
+
 # Trigger a highlight in the appropriate direction when pressing these keys:
 g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 

@@ -6,6 +6,8 @@ endif
 
 g:loaded_statusline_plugin = 1
 
+logger#Trace('Enter in: ' .. substitute(expand('<stack>'), '.*\(\.\.|\s\)', '', ''))
+
 import autoload "statusline.vim"
 if has('statusline')
   set statusline=%!Statusline()
