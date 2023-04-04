@@ -21,3 +21,8 @@ tags
 **/.base16*
 **/colors/base16*
 **/vimrc-colorscheme*
+
+#logs and docs
+doc
+log
+

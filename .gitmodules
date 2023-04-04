@@ -97,9 +97,6 @@
 [submodule ".vim/pack/utilities/opt/goyo.vim"]
 	path = .vim/pack/utilities/opt/goyo.vim
 	url = https://github.com/junegunn/goyo.vim.git
-[submodule ".vim/pack/utilities/opt/vim-mundo"]
-	path = .vim/pack/utilities/opt/vim-mundo
-	url = https://github.com/simnalamburt/vim-mundo.git
 [submodule ".vim/pack/utilities/opt/undotree"]
 	path = .vim/pack/utilities/opt/undotree
 	url = https://github.com/mbbill/undotree.git
@@ -127,3 +124,9 @@
 [submodule ".vim/pack/utilities/opt/vim-plugin-ansiesc"]
 	path = .vim/pack/utilities/opt/vim-plugin-ansiesc
 	url = https://github.com/powerman/vim-plugin-ansiesc.git
+[submodule ".vim/pack/utilities/opt/vim-mundo"]
+	path = .vim/pack/utilities/opt/vim-mundo
+	url = https://github.com/simnalamburt/vim-mundo.git
+[submodule ".vim/pack/lsp/opt/coc.nvim"]
+	path = .vim/pack/lsp/opt/coc.nvim
+	url = https://github.com/neoclide/coc.nvim.git
