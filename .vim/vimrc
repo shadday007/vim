@@ -1,4 +1,8 @@
 vim9script
+
+source ~/.vim/plugin/logger.vim
+logger#Trace('Enter in: ' .. substitute(expand('<stack>'), '.*\(\.\.|\s\)', '', ''))
+
 # Leader key   must be first
 g:mapleader = "\<Space>"
 g:maplocalleader = ','
@@ -11,3 +15,13 @@ endif
 packadd! matchit
 # For filtering quickfix list
 packadd cfilter
+
+g:lsp_enable = true
+g:lsp_layer = 'coc'
+
+# dict { 'topic': 'layer', 'lsp': 'coc'}
+g:enable_layers = {
+  'tlsp': 'coc',
+  # '+lsp': 'coc',
+  # 'lsp': 'vim-lsp',
+}

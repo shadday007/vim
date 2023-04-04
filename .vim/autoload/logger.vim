@@ -78,7 +78,7 @@ def Log(message: string, level: number = 2): number
 
     # Build log message
     var log_message = '['
-        .. levels[level] .. '] '
+        .. printf('%-9s', levels[level]  .. '] ')
         .. strftime('%Y-%m-%d %H:%M:%S')
         .. ' - ' .. message
 
@@ -106,19 +106,42 @@ export def ShowLog()
         Trace('vertical botright split ' .. log_file)
         execute 'vertical botright split ' .. log_file
         log_buf = bufnr('')
-        execute 'setlocal buftype=nofile bufhidden=hide noswapfile nomodifiable'
+        execute 'setlocal buftype=nofile filetype=log bufhidden=hide noswapfile nomodifiable'
     else
       # Switch to log buffer and display it
       Trace('vertical botright sbuffer ' .. log_buf)
       execute 'vertical botright sbuffer ' .. log_buf
     endif
 
-    setlocal syntax=off
     setlocal wrap
     setlocal nowrapscan
     setlocal scrolloff=999
     setlocal cursorline
     setlocal autoread
+
+    syn match logNumber       '\<-\?\d\+\>'
+    syn match LogBracket /[[\]]/
+    syn match LogDate /\d\{4}-\d\{2}-\d\{2}/
+    syn match LogHour /\d\{2}:\d\{2}:\d\{2}/
+    syn match LogTrace /TRACE/
+    syn match LogDebug /DEBUG/
+    syn match LogInfo /INFO/
+    syn match LogWarning /WARNING/
+    syn match LogError /ERROR/
+    syn match LogSystem /SYSTEM/
+    syn match logFilePath   '[^a-zA-Z0-9"']\@<=\/\w[^\n|,; ()'"\]{}]\+'
+    hi def link LogNumber Number
+    hi def link LogBracket Comment
+    hi def link LogDate Identifier
+    hi def link LogHour Function
+    hi def link LogTrace Comment
+    hi def link LogDebug Debug
+    hi def link LogInfo Repeat
+    hi def link LogWarning WarningMsg
+    hi def link LogError Error
+    hi def link LogSystem Constant
+    hi def link LogFilePath Conditional
+
     normal! G
-    nnoremap <buffer><silent> q :quit<CR>
+    nnoremap <buffer><silent> q :bd<CR>
 enddef
