@@ -166,6 +166,7 @@ install() {
 
   local whereIsInstalled
   whereIsInstalled=$(isInstalled "$package")
+  gitFile="$PACK_PATH/$whereIsInstalled/.git"
 
   if [[ -n "$whereIsInstalled" ]]; then
     inGroup=$(echo "$whereIsInstalled" | cut -d "/" -f1)
@@ -174,9 +175,18 @@ install() {
     # echo "whereIsInstalled:=> $whereIsInstalled"
     # echo "if [[ $group == $inGroup && $opt == $inOpt ]]; then"
     if [[ "$group" == "$inGroup" && "$opt" == "$inOpt" ]]; then
-      echo "repo $repository is already installed. Skip it."
-      #echo "repo $repository is already installed, updating..."
-      #git submodule update --remote "$pack_dir"
+      if [[ -f "$gitFile" ]]; then
+        echo "repo $repository is already installed. Skip it."
+        #git submodule update --remote "$pack_dir"
+      else
+        echo "repo $repository is installed and need repair, trying to fix..."
+        git submodule deinit -f "$pack_dir"
+        git rm -f "$pack_dir"
+        rm -rf .git/modules/"$pack_dir"
+        git submodule init
+        git submodule add --force "$repository" "$pack_dir"
+        git add .gitmodules "$pack_dir"
+      fi
     else
       echo -e "Plugin ${pur}$package${clr} installed in group: ${cyn}$inGroup${clr} option: ${cyn}$inOpt${clr}"
       echo -e "Please uninstall first."
