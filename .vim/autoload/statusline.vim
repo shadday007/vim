@@ -1,5 +1,7 @@
 vim9script
 
+import autoload "corefunctions.vim" as CF
+
 g:git_infos = {'dir': '', 'branch': '', 'prev_dir': '', 'is_root': false}
 var git = g:git_infos
 
@@ -508,7 +510,7 @@ export def Update_highlight()
   execute 'highlight User7 ' ..
     pinnacle#highlight({
       'bg': fg,
-      'fg': 'black',
+      'fg': CF.GetOppositeColor(fg),
       'term': 'bold'
     })
 
@@ -516,8 +518,9 @@ export def Update_highlight()
   execute 'highlight User4 ' .. pinnacle#highlight({'bg': bg, 'fg': fg})
 
   # Right-hand side section.
-  bg = pinnacle#extract_fg('Cursor')
+  # bg = pinnacle#extract_fg('Cursor')
   fg = pinnacle#extract_fg('User3')
+  bg = CF.GetOppositeColor(fg)
   execute 'highlight User5 ' ..
     pinnacle#highlight({
       'bg': fg,
@@ -525,24 +528,29 @@ export def Update_highlight()
       'term': 'bold'
     })
 
+  # Inverted Error styling, for right-hand side 'Powerline' triangle.
+  # fg = pinnacle#extract_fg('User3')
+  bg = pinnacle#extract_bg('StatusLine')
+  fg = fg
+  execute 'highlight User8 ' .. pinnacle#highlight({'bg': bg, 'fg': fg})
+
   # used only for visual mode
+  bg = pinnacle#extract_bg('DiffText')
+  fg = CF.GetOppositeColor(bg)
   execute 'highlight User6 ' ..
     pinnacle#highlight({
-      'bg': pinnacle#extract_fg('DiffText'),
-      'fg': pinnacle#extract_fg('Cursor'),
+      'bg': bg,
+      'fg': fg,
       'term': 'bold,italic'
     })
 
-  # Inverted Error styling, for right-hand side 'Powerline' triangle.
-  var Bfg = pinnacle#extract_fg('User3')
-  var Bbg = pinnacle#extract_bg('StatusLine')
-  execute 'highlight User8 ' .. pinnacle#highlight({'bg': Bbg, 'fg': Bfg})
-
   # for warning
+  bg = pinnacle#extract_fg('WarningMsg')
+  fg = CF.GetOppositeColor(bg)
   execute 'highlight User9 ' ..
     pinnacle#highlight({
-      'bg': pinnacle#extract_bg('StatusLine'),
-      'fg': pinnacle#extract_fg('WarningMsg'),
+      'bg': bg,
+      'fg': fg,
       'cterm': 'bold,italic'
     })
   highlight = pinnacle#italicize('User9')
