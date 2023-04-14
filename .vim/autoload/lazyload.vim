@@ -2,7 +2,10 @@ vim9script
 
 var plugins = {}
 
+import autoload "logger.vim"
+
 export def Lazy(config: dict<any>)
+  logger.Trace('Enter in: ' .. substitute(expand('<stack>'), '.*\(\.\.|\s\)', '', ''))
   var id = config.plugin
   plugins[id] = config
   var load = 'call <SID>Load("' .. id .. '")'
@@ -30,6 +33,7 @@ export def Lazy(config: dict<any>)
 enddef
 
 def BeforeMaps(config: dict<any>, map: string, load: string): void
+  logger.Trace('Enter in: ' .. substitute(expand('<stack>'), '.*\(\.\.|\s\)', '', ''))
   if has_key(config, map)
     for mapping in items(config[map])
       execute map .. ' ' ..
@@ -41,6 +45,7 @@ def BeforeMaps(config: dict<any>, map: string, load: string): void
 enddef
 
 def AfterMaps(config: dict<any>, map: string): void
+  logger.Trace('Enter in: ' .. substitute(expand('<stack>'), '.*\(\.\.|\s\)', '', ''))
   if has_key(config, map)
     for mapping in items(config[map])
       execute map .. ' ' .. mapping[0] .. ' ' .. mapping[1]
@@ -49,6 +54,7 @@ def AfterMaps(config: dict<any>, map: string): void
 enddef
 
 def Load(id: string)
+  logger.Trace('Enter in: ' .. substitute(expand('<stack>'), '.*\(\.\.|\s\)', '', ''))
   var config = plugins[id]
   var plugin = id
   if has_key(config, 'beforeload')
@@ -74,8 +80,9 @@ def Load(id: string)
 enddef
 
 export def Packadd(plugin: string)
+  logger.Trace('Enter in: ' .. substitute(expand('<stack>'), '.*\(\.\.|\s\)', '', ''))
   if has('packages')
     execute 'packadd ' .. plugin
-    echom 'Plugin: ' .. plugin .. ' Loaded!.'
+    logger.Info('Plugin: ' .. plugin .. ' Loaded!.')
   endif
 enddef
