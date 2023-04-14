@@ -144,9 +144,23 @@ isInstalled() {
   done
 }
 
-# install the repo, e.g. $1="USER/NAME" $2="colors" $3="start"
+# install the repo, e.g. $1="USER/NAME#b:branch#@:commit|tag|etc" $2="colors" $3="start"
 install() {
-  local plugin=$1
+  input="$1"
+  # Extract user/repo
+  plugin="${input%%#*}"
+  branch=""
+  commit_or_tag=""
+  local rg="#b:([^@]*)"
+  # Extract branch (if provided)
+  if [[ "$input" =~ $rg ]]; then
+    branch="${BASH_REMATCH[1]}"
+  fi
+  rg="#@:(.*)"
+  # Extract commit_or_tag (if provided)
+  if [[ "$input" =~ $rg ]]; then
+    commit_or_tag="${BASH_REMATCH[1]}"
+  fi
   local group=$2
   local opt=${3,,}
   local repository="https://github.com/$plugin.git"
@@ -184,7 +198,19 @@ install() {
         git rm -f "$pack_dir"
         rm -rf .git/modules/"$pack_dir"
         git submodule init
-        git submodule add --force "$repository" "$pack_dir"
+        # Install repository as submodule
+        if [[ -n "$branch" ]]; then
+          git submodule add --force -b "$branch" "$repository" "$pack_dir"
+        else
+          git submodule add --force "$repository" "$pack_dir"
+        fi
+        # Checkout commit_or_tag (if provided)
+        if [[ -n "$commit_or_tag" ]]; then
+          cd "$pack_dir"
+          git fetch
+          git checkout "$commit_or_tag"
+          cd ..
+        fi
         git add .gitmodules "$pack_dir"
       fi
     else
@@ -207,7 +233,19 @@ install() {
     check_dir "$group_dir"
 
     git submodule init
-    git submodule add --force "$repository" "$pack_dir"
+    # Install repository as submodule
+    if [[ -n "$branch" ]]; then
+      git submodule add --force -b "$branch" "$repository" "$pack_dir"
+    else
+      git submodule add --force "$repository" "$pack_dir"
+    fi
+    # Checkout commit_or_tag (if provided)
+    if [[ -n "$commit_or_tag" ]]; then
+      cd "$pack_dir"
+      git fetch
+      git checkout "$commit_or_tag"
+      cd ..
+    fi
     git add .gitmodules "$pack_dir"
   fi
 }
