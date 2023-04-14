@@ -13,7 +13,7 @@ var topic: string = expand('<sfile>:t:r')
 logger.Trace('Enter in: ' .. substitute(expand('<stack>'), '.*\(\.\.|\s\)', '', ''))
 
 if !get(g:, topic .. "_enable", false)
-  logger.Trace('this topic layer is not enable: ' .. topic)
+  logger.Info('[lsp.vim]: this topic layer is not enable: ' .. topic)
   finish
 endif
 

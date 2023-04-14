@@ -9,29 +9,36 @@ var jobs = []
 import autoload "corefunctions.vim" as CF
 import autoload "statusline.vim"
 import autoload "logger.vim"
+import autoload "lazyload.vim"
 
 export def EnableLayers(list_of_packages: list<any>)
 
   logger.Trace('Enter in: ' .. substitute(expand('<stack>'), '.*\(\.\.|\s\)', '', ''))
 
+  var time: list<any>
+  var result: string = ''
+
   for package in list_of_packages
     var id = split(package.repository, '/')[1]
     plugins[id] = package
 
-    if has_key(package, 'load')
-      if package['load'] == 'now'
-        AddJobToQueue(id)
-      else
-        AddLazyLoadJob(id)
-      endif
+    if index(g:installed_plugins, id) >= 0
+      ConfigPackage(id)
     else
-      AddJobToQueue(id)
+      if has_key(package, 'load')
+        if package['load'] == 'now'
+          AddJobToQueue(id)
+        else
+          AddLazyLoadJob(id)
+        endif
+      else
+        AddJobToQueue(id)
+      endif
     endif
   endfor
 
-  var cache = 'layers.cache' #g:info
-  writefile([printf("plugins = %s", plugins)], cache)
-  writefile([printf("job_queue = %s", job_queue)], cache, 'a')
+  logger.Debug(printf("plugins = %s", plugins))
+  logger.Debug(printf("job_queue = %s", job_queue))
 enddef
 
 def AddLazyLoadJob(plugin: string)
@@ -42,10 +49,30 @@ def AddJobToQueue(package_id: string)
 
   logger.Trace('Enter in: ' .. substitute(expand('<stack>'), '.*\(\.\.|\s\)', '', ''))
 
+  var config = plugins[package_id]
+  var extra_cmd: string = ''
+  var branch: string = ''
+  var commit_or_tag: string = ''
+
+  if has_key(config, 'commit_or_tag')
+    branch = '#@:' .. config.commit_or_tag
+  endif
+
+  if has_key(config, 'branch')
+    branch = '#b:' .. config.branch
+  endif
+
+  if has_key(config, 'do')
+    extra_cmd = ' && ' .. config.do
+  endif
+
   var cmd = ['bash', '-c', $HOME .. '/.vim/pack/pack-manager '
-    .. 'group ' .. plugins[package_id].group .. ' ; '
-    .. $HOME .. '/.vim/pack/pack-manager install ' .. plugins[package_id].repository
-    .. ' ' .. plugins[package_id].group .. ' ' .. plugins[package_id].opt]
+    .. 'group ' .. config.group .. ' ; '
+    .. $HOME .. '/.vim/pack/pack-manager install ' .. config.repository
+    .. branch .. commit_or_tag
+    .. ' ' .. config.group .. ' ' .. config.opt
+    .. extra_cmd]
+
   var opts = {}
   var job = {}
 
@@ -53,13 +80,14 @@ def AddJobToQueue(package_id: string)
   opts.out_msg = 0
   opts.vertical = 1
   opts.callback = 'JobOutput'
-  opts.exit_cb = 'JobExit'
-  # opts.term_finish = 'open'
+  opts.exit_cb = (j, e) => JobExit(package_id, j, e)
+  # opts.term_finish = 'close'
 
   job = {
     'cmd': cmd,
     'opts': opts,
     'priority': plugins[package_id].priority,
+    'job_id': package_id,
   }
   add(job_queue, job)
   logger.Debug(printf("Add to job_queue the job: %s", cmd))
@@ -115,10 +143,27 @@ def JobStop(): void
   timer_start(0, 'JobRunner')
 enddef
 
-def JobExit(job: job, status: number)
+def JobExit(id: string, job: job, status: number)
   var ch = job_getchannel(job)
   while ch_status(ch) ==# 'open' | sleep 1ms | endwhile
   while ch_status(ch) ==# 'buffered' | sleep 1ms | endwhile
   JobStop()
+  ConfigPackage(id)
 enddef
 
+def ConfigPackage(plugin: string)
+  logger.Trace('Enter in: ' .. substitute(expand('<stack>'), '.*\(\.\.|\s\)', '', ''))
+
+  var config = plugins[plugin]
+  if has_key(config, 'beforeload')
+    for item in config.beforeload
+      execute item
+    endfor
+  endif
+  lazyload.Packadd(plugin)
+  if has_key(config, 'afterload')
+    for item in config.afterload
+      execute item
+    endfor
+  endif
+enddef
