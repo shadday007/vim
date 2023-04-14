@@ -16,12 +16,12 @@ packadd! matchit
 # For filtering quickfix list
 packadd cfilter
 
-g:lsp_enable = true
-g:lsp_layer = 'coc'
+# g:lsp_enable = true
+# g:lsp_layer = 'coc'
 
 # dict { 'topic': 'layer', 'lsp': 'coc'}
 g:enable_layers = {
-  'tlsp': 'coc',
+  'lsp': 'coc',
   # '+lsp': 'coc',
   # 'lsp': 'vim-lsp',
 }
