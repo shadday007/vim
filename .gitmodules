@@ -130,3 +130,4 @@
 [submodule ".vim/pack/lsp/opt/coc.nvim"]
 	path = .vim/pack/lsp/opt/coc.nvim
 	url = https://github.com/neoclide/coc.nvim.git
+	branch = release
