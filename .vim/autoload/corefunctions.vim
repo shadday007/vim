@@ -179,13 +179,6 @@ export def IsDir(plugin: string): bool
   return isdirectory(expand(plugin)) ? true : false
 enddef
 
-export def Testing()
-    # this is the droid you're looking for
-    echo substitute(expand('<stack>'), '.*\(\.\.\|\s\)', '', '')
-    # compare with this (not what you want, just for reference)
-    echo expand('<stack>')
-enddef
-
 def GetDirDict(dir_path: list<string>): dict<any>
   var dir_dictionary = {}
   var dir_name: string
@@ -198,8 +191,14 @@ def GetDirDict(dir_path: list<string>): dict<any>
     subdirs = split(globpath(dir, '*'), '\n')
     subdirs = filter(subdirs, 'isdirectory(v:val)')
     subdirs_list = map(subdirs, 'fnamemodify(v:val, ":t")')
-    dir_dictionary[dir_name] = subdirs_list
+
+    if has_key(dir_dictionary, dir_name)
+      extend(dir_dictionary[dir_name], subdirs_list)
+    else
+      dir_dictionary[dir_name] = subdirs_list
+    endif
   endfor
+  logger.Debug(printf("dir_dictionary = %s", dir_dictionary))
   return dir_dictionary
 enddef
 
