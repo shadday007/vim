@@ -36,7 +36,7 @@ var levels = {
 # 1: TRACE, 2: DEBUG, 3: INFO, 4: WARNING, 5: ERROR
 var log_level = get(g:, 'logger_level', 1)
 var log_verbose = get(g:, 'logger_verbose', v:false)
-var log_file = get(g:, 'logger_file', $HOME .. '/.vim/log/log.txt')
+var log_file = get(g:, 'logger_file', $HOME .. '/.vim/log/vim.log')
 
 
 # Function to log trace messages
@@ -103,14 +103,14 @@ export def ShowLog()
     # Open log file in read-only mode
     var log_buf = bufnr(log_file)
     if log_buf == -1
-        Trace('vertical botright split ' .. log_file)
-        execute 'vertical botright split ' .. log_file
+        Info('tabedit ' .. log_file)
+        execute 'tabedit ' .. log_file
         log_buf = bufnr('')
         execute 'setlocal buftype=nofile filetype=log bufhidden=hide noswapfile nomodifiable'
     else
       # Switch to log buffer and display it
-      Trace('vertical botright sbuffer ' .. log_buf)
-      execute 'vertical botright sbuffer ' .. log_buf
+      Info('tab sbuffer ' .. log_buf)
+      execute 'tab sbuffer ' .. log_buf
     endif
 
     setlocal wrap
@@ -143,5 +143,5 @@ export def ShowLog()
     hi def link LogFilePath Conditional
 
     normal! G
-    nnoremap <buffer><silent> q :bd<CR>
+    nnoremap <buffer><silent> q :bwipeout<CR>
 enddef
