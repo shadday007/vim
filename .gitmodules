@@ -127,6 +127,36 @@
 [submodule ".vim/pack/utilities/opt/vim-mundo"]
 	path = .vim/pack/utilities/opt/vim-mundo
 	url = https://github.com/simnalamburt/vim-mundo.git
+[submodule ".vim/pack/lsp/opt/friendly-snippets"]
+	path = .vim/pack/lsp/opt/friendly-snippets
+	url = https://github.com/rafamadriz/friendly-snippets.git
+[submodule ".vim/pack/lsp/opt/lsp"]
+	path = .vim/pack/lsp/opt/lsp
+	url = https://github.com/yegappan/lsp.git
+[submodule ".vim/pack/lsp/opt/vim-lsp-settings-adapter"]
+	path = .vim/pack/lsp/opt/vim-lsp-settings-adapter
+	url = https://github.com/normen/vim-lsp-settings-adapter.git
+[submodule ".vim/pack/lsp/opt/vim-lsp-settings"]
+	path = .vim/pack/lsp/opt/vim-lsp-settings
+	url = https://github.com/mattn/vim-lsp-settings.git
+[submodule ".vim/pack/lsp/opt/asyncomplete-lsp.vim"]
+	path = .vim/pack/lsp/opt/asyncomplete-lsp.vim
+	url = https://github.com/prabirshrestha/asyncomplete-lsp.vim.git
+[submodule ".vim/pack/lsp/opt/vim-lsp"]
+	path = .vim/pack/lsp/opt/vim-lsp
+	url = https://github.com/prabirshrestha/vim-lsp.git
+[submodule ".vim/pack/lsp/opt/vim-vsnip"]
+	path = .vim/pack/lsp/opt/vim-vsnip
+	url = https://github.com/hrsh7th/vim-vsnip.git
+[submodule ".vim/pack/lsp/opt/asyncomplete.vim"]
+	path = .vim/pack/lsp/opt/asyncomplete.vim
+	url = https://github.com/prabirshrestha/asyncomplete.vim.git
+[submodule ".vim/pack/lsp/opt/vim-lsp-ale"]
+	path = .vim/pack/lsp/opt/vim-lsp-ale
+	url = https://github.com/rhysd/vim-lsp-ale.git
+[submodule ".vim/pack/lsp/opt/ale"]
+	path = .vim/pack/lsp/opt/ale
+	url = https://github.com/dense-analysis/ale.git
 [submodule ".vim/pack/lsp/opt/coc.nvim"]
 	path = .vim/pack/lsp/opt/coc.nvim
 	url = https://github.com/neoclide/coc.nvim.git
