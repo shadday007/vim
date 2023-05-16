@@ -213,7 +213,7 @@ export def GetTopics(): dict<any>
 enddef
 
 export def GetAllPlugins(): dict<any>
-  var install_path = finddir( "start", $HOME .. '/.vim/pack/**1', -1)
+  var install_path = finddir( "start", $HOME .. '/.vim/pack/**2', -1)
   extend(install_path, finddir( "opt", $HOME .. '/.vim/pack/**1', -1))
 
   return GetDirDict(install_path)

@@ -9,20 +9,16 @@ var jobs = []
 import autoload "corefunctions.vim" as CF
 import autoload "statusline.vim"
 import autoload "logger.vim"
-import autoload "lazyload.vim"
 
 export def EnableLayers(list_of_packages: list<any>)
 
   logger.Trace('Enter in: ' .. substitute(expand('<stack>'), '.*\(\.\.|\s\)', '', ''))
 
-  var time: list<any>
-  var result: string = ''
-
   for package in list_of_packages
     var id = split(package.repository, '/')[1]
     plugins[id] = package
 
-    if index(g:installed_plugins, id) >= 0
+    if IsPluginInstalled(id)
       ConfigPackage(id)
     else
       if has_key(package, 'load')
@@ -43,6 +39,13 @@ enddef
 
 def AddLazyLoadJob(plugin: string)
   echom "adding " .. plugin .. " to lazyloadlojbs stack"
+enddef
+
+def IsPluginInstalled(id: string): bool
+  if g:layer_method == 'simple'
+    return finddir(id, $HOME .. '/.vim/pack/**') != ""
+  endif
+  return index(g:installed_plugins, id) >= 0
 enddef
 
 def AddJobToQueue(package_id: string)
@@ -91,7 +94,7 @@ def AddJobToQueue(package_id: string)
   }
   add(job_queue, job)
   logger.Debug(printf("Add to job_queue the job: %s", cmd))
-  CF.InfoNotification("Processing repository: " .. plugins[package_id].repository)
+  # CF.InfoNotification("Processing repository: " .. plugins[package_id].repository)
   timer_start(0, 'JobRunner')
 enddef
 
@@ -102,7 +105,7 @@ def JobRunner(timer: number)
   if len(job_queue) == 0
     if running_jobs == 0
       logger.Info('job_queue is empty, no more jobs left.')
-      CF.InfoNotification("No more plugins waiting for install..")
+      # CF.InfoNotification("No more plugins waiting for install..")
     endif
     return
   endif
@@ -160,7 +163,9 @@ def ConfigPackage(plugin: string)
       execute item
     endfor
   endif
-  lazyload.Packadd(plugin)
+
+  execute 'packadd ' .. plugin
+
   if has_key(config, 'afterload')
     for item in config.afterload
       execute item
