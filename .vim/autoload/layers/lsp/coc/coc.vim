@@ -4,39 +4,6 @@ import autoload "corefunctions.vim" as CF
 import autoload "layers.vim"
 import autoload "logger.vim"
 
-# NOTE: 2023-03-22(shadday): remember use call <SID>Func()
-
-# INFO: 2023-03-22(shadday): plugins dict structure
-# {
-#   'plugin' : {
-#
-#   }
-
-# lazyload.Lazy({
-#   'plugin': 'vim-grepper',
-#   'commands': {
-#     'Grepper': '-nargs=? -bar -bang',
-#   },
-#   'beforeload': [
-#     'grepper#GrepperInit()',
-#   ],
-#   'nnoremap': {
-#     '<leader>fga': ':Grepper -tool ag<cr>',
-#     '<leader>fgr': ':Grepper -tool rg<cr>',
-#     '<leader>fgg': ':Grepper -tool git<cr>',
-#     '<leader>fgs': ':Grepper -tool ag -side<cr>',
-#     '<leader>f* ': ':Grepper -tool ag -cword -noprompt<cr>',
-#     '<leader>fg':  ':Grepper<cr>',
-#     'gs': '<plug>(GrepperOperator)'
-#   },
-#   'xnoremap': {
-#     'gs': '<plug>(GrepperOperator)'
-#   },
-#   'afterload': [
-#     'grepper#GrepperUserCommands()',
-#   ]
-# })
-
 def Plugins(): list<any> # A.K.A. Packages
   var plugins: list<any> = []
 
