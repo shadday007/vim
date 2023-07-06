@@ -9,7 +9,7 @@ g:loaded_logger_plugin = 1
 # import autoload "logger.vim"
 
 # Global options
-g:logger_level = 2  # 1: TRACE, 2: DEBUG, 3: INFO, 4: WARNING, 5: ERROR
+g:logger_level = 3  # 1: TRACE, 2: DEBUG, 3: INFO, 4: WARNING, 5: ERROR
 g:logger_verbose = v:false
 g:logger_file = expand( $HOME .. '/.vim/log/vim.log' )
 

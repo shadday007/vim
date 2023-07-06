@@ -1,7 +1,7 @@
 vim9script
 
 source ~/.vim/plugin/logger.vim
-logger#Trace('Enter in: ' .. substitute(expand('<stack>'), '.*\(\.\.|\s\)', '', ''))
+logger#Trace('[vimrc]->Begin')
 
 # Leader key   must be first
 g:mapleader = "\<Space>"
@@ -14,14 +14,9 @@ endif
 # Enable extended % matching
 packadd! matchit
 # For filtering quickfix list
-packadd cfilter
-
-# g:lsp_enable = true
-# g:lsp_layer = 'coc'
+packadd! cfilter
 
 # dict { 'topic': 'layer', 'lsp': 'coc'}
 g:enable_layers = {
   'lsp': 'coc',
-  # '+lsp': 'coc',
-  # 'lsp': 'vim-lsp',
 }

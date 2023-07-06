@@ -21,6 +21,7 @@ def TopicAndLayerExist(tpc: string, lyr: string): bool
   return false
 enddef
 
+g:layer_method = get(g:, 'layer_method', 'simple')
 var time = reltime()
 var is_simple_method: bool =  g:layer_method == 'simple'
 

@@ -1,0 +1,151 @@
+{
+  "languageserver": {
+    "lua": {
+      "command": "lua-lsp",
+      "filetypes": ["lua"]
+    },
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
+      "rootPatterns": [
+        ".ccls",
+        "compile_commands.json",
+        ".vim/",
+        ".git/",
+        ".hg/"
+      ],
+      "initializationOptions": {
+        "cache": {
+          "directory": "/tmp/ccls"
+        },
+        "client": {
+          "snippetSupport": true
+        }
+      }
+    },
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"]
+    },
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
+    }
+  },
+  "suggest.maxCompleteItemCount": 22,
+  "suggest.noselect": false,
+  "suggest.completionItemKindLabels": {
+    "keyword": "\uf1de", //  sliders
+    "variable": "\ue79b", //  isometric box
+    "value": "\uf89f", //  digits 123
+    "operator": "\u03a8", // Ψ greek letter psi
+    "constructor": "\uf0ad", //  wrench
+    "function": "\u0192", // ƒ latin small letter F
+    "reference": "\ufa46", // 渚 retweet symbol
+    "constant": "\uf8fe", //  greek letter pi
+    "method": "\uf09a", //  facebook "f"
+    "struct": "\ufb44", // פּ file tree
+    "class": "\uf0e8", //  hierarchy / site map
+    "interface": "\uf417", //  git commit / line interrupted by circle
+    "text": "\ue612", //  left-justified lines
+    "enum": "\uf02c", //  pair of tags
+    "enumMember": "\uf02b", //  tag
+    "module": "\uf40d", //  code file / page showing angle brackets
+    "color": "\ue22b", //  palette
+    "property": "\ue624", //  predator dots
+    "field": "\uf9be", // 料left-justified sorted lines
+    "unit": "\uf475", //  negative-space ellipsis
+    "event": "\ufacd", // 鬒clock alert / clock with exclamation mark
+    "file": "\uf15b", //  file / blank page
+    "folder": "\uf07b", //  folder
+    "snippet": "\ue60b", //  pair of curly braces
+    "typeParameter": "\uf728", //  file presentation box
+    "default": "\uf29c" //  question mark in circle
+  },
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "typescript",
+    "typescriptreact",
+    "json",
+    "javascriptreact",
+    "typescript.tsx",
+    "html",
+    "json",
+    "css",
+    "graphql",
+    "scss"
+  ],
+  //  "eslint.filetypes": [
+  //    "javascript",
+  //    "typescript",
+  //    "typescriptreact",
+  //    "javascriptreact",
+  //    "typescript.tsx"
+  //  ],
+  // diagnostic setup
+  "diagnostic.enable": true,
+  "diagnostic.errorSign": "✖",
+  "diagnostic.warningSign": "➤",
+  "diagnostic.infoSign": "ⓘ",
+  "diagnostic.enableMessage": "jump",
+  "diagnostic.virtualText": true,
+  "diagnostic.virtualTextPrefix": "» ",
+  "diagnostic.virtualTextCurrentLineOnly": false,
+  "diagnostic.checkCurrentLine": true,
+  "json.format.enable": true,
+  // snippets setup
+  "snippets.loadFromExtensions": true,
+  "snippets.loadVSCodeProjectSnippets": true,
+  "snippets.ultisnips.enable": true,
+  "snippets.ultisnips.directories": [
+    "~/.vim/plugged/vim-snippets/ultisnips/",
+    "~/.vim/plugged/vim-snippets/snippets/"
+  ],
+  "snippets.userSnippetsDirectory": "~/.vim/ultisnips/",
+  "snippets.snipmate.enable": true,
+  "suggest.snippetIndicator": " ⭐︎",
+  "snippets.extends": {
+    "cpp": ["c"],
+    "javascriptreact": ["javascript"],
+    "ejs": ["javascript", "jst", "html"],
+    "typescript": ["javascript"]
+  },
+  //
+  "tree.key.close": "",
+   // git setup
+  "git.addedSign.hlGroup": "GitGutterAdd",
+  "git.changedSign.hlGroup": "GitGutterChange",
+  "git.removedSign.hlGroup": "GitGutterDelete",
+  "git.topRemovedSign.hlGroup": "GitGutterDelete",
+  "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
+
+  "html.format.enable": true,
+
+  // =========================================================================
+  // coc-prettier
+  // =========================================================================
+
+  // "prettier.disableSuccessMessage": true,
+  "prettier.disableLanguages": ["markdown"],
+  "prettier.singleQuote": false,
+  "prettier.trailingComma": "es5",
+  "prettier.bracketSpacing": true,
+  "prettier.semi": true,
+  "prettier.useTabs": false,
+  "prettier.proseWrap": "preserve",
+  "prettier.arrowParens": "always",
+  "prettier.statusItemText": "<ᴀ-=> ᴘʀᴇᴛᴛɪᴇʀ",
+
+  // disable: [js] File is a CommonJS module; it may be converted to an ES6 module
+  "javascript.suggestionActions.enabled": false,
+  "javascript.suggest.autoImports": true,
+  "typescript.suggest.autoImports": true,
+
+  // Solargraph setup
+  // "solargraph.useBundler": true,
+  // "solargraph.diagnostics": true,
+  // "solargraph.formatting": true
+}
